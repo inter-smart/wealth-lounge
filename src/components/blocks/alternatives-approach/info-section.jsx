@@ -256,7 +256,7 @@ export default function InfoSection({ data = local_data }) {
                   >
                     {item?.title}
                   </Heading>
-                  <div className="typography mb-[20px] sm:mb-[30px] xl:mb-[40px] 2xl:mb-[60px]">
+                  <div className="typography mb-[15px] sm:mb-[20px] xl:mb-[30px] 2xl:mb-[40px]">
                     {parse(item?.description)}
                   </div>
                   {item?.additional_description && (
