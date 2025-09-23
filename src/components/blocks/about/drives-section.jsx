@@ -80,7 +80,7 @@ export default function DrivesSection({ data = local_data }) {
               spaceBetween: 10,
             },
             640: {
-              slidesPerView: 2,
+              slidesPerView: 3,
               spaceBetween: 15,
               autoplay: {
                 delay: 5000,
@@ -106,7 +106,7 @@ export default function DrivesSection({ data = local_data }) {
                 style={{ width: "25%" }}
                 className="!h-auto"
               >
-                <div className="group w-full h-full min-h-[100px] sm:min-h-[140px] xl:min-h-[176px] 2xl:min-h-[268px] bg-[#fffbf4] p-[15px] xl:p-[20px] 2xl:p-[30px] flex flex-col items-center justify-center transition duration-300 hover:">
+                <div className="group w-full h-full min-h-[100px] sm:min-h-[140px] xl:min-h-[180px] 2xl:min-h-[268px] bg-[#fffbf4] p-[15px] xl:p-[20px] 2xl:p-[30px] flex flex-col items-center justify-center transition duration-600 hover:bg-primary/20">
                   <Image
                     src={item?.media?.path}
                     alt={item?.media?.alt}

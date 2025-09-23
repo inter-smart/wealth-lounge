@@ -40,7 +40,7 @@ function BreadcrumbLink({ asChild, className, ...props }) {
       data-slot="breadcrumb-link"
       className={cn(
         "hover:text-foreground transition-colors",
-        "text-[12px] sm:text-[12px] lg:text-[12px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[18px] leading-normal font-normal text-white",
+        "text-[10px] sm:text-[12px] lg:text-[12px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[18px] leading-normal font-normal text-white",
         className
       )}
       {...props}
@@ -55,7 +55,10 @@ function BreadcrumbPage({ className, ...props }) {
       role="link"
       aria-disabled="true"
       aria-current="page"
-      className={cn("text-primary font-normal", className)}
+      className={cn(
+        "text-[10px] sm:text-[12px] lg:text-[12px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[18px] leading-normal font-normal text-primary",
+        className
+      )}
       {...props}
     />
   );

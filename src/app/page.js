@@ -42,47 +42,49 @@ const ConnectSection = dynamic(
   }
 );
 
-const local_data_about = {
-  media: {
-    type: "image",
-    path: "/images/home-about-1.jpg",
-    alt: "about",
+const local_data = {
+  about_section: {
+    media: {
+      type: "image",
+      path: "/images/home-about-1.jpg",
+      alt: "about",
+    },
+    title: "Who We Are",
+    sub_title:
+      "The Wealth Lounge was created after many years of observing the habits of individuals managing their finances, realising that there was a shortfall in basic information and the direction in which the world of wealth creation is heading.",
+    description:
+      "Our vision is to bring together innovative, prestigious and reputable investment providers across multiple asset-classes, with our growing client base, giving them the ability to absorb and apply these solutions into their own wealth creation initiatives. We will support and continue to work hard with our clients to ensure that they are always presented with the most robust investment opportunities from an ever-changing economic landscape.",
+    button: {
+      type: "primary",
+      icon: "icons/brand-icon-black.svg",
+      label: "Learn More",
+      link: "/",
+    },
+    item_specs: [
+      {
+        title: "Years Combined Experience",
+        value: "75",
+        sufix: "+",
+      },
+      {
+        title: "High Net Worth Clients",
+        value: "1200",
+        sufix: "+",
+      },
+      {
+        title: "Countries Being Served",
+        value: "35",
+        sufix: "+",
+      },
+    ],
   },
-  title: "Who We Are",
-  sub_title:
-    "The Wealth Lounge was created after many years of observing the habits of individuals managing their finances, realising that there was a shortfall in basic information and the direction in which the world of wealth creation is heading.",
-  description:
-    "Our vision is to bring together innovative, prestigious and reputable investment providers across multiple asset-classes, with our growing client base, giving them the ability to absorb and apply these solutions into their own wealth creation initiatives. We will support and continue to work hard with our clients to ensure that they are always presented with the most robust investment opportunities from an ever-changing economic landscape.",
-  button: {
-    type: "primary",
-    icon: "icons/brand-icon-black.svg",
-    label: "Learn More",
-    link: "/",
-  },
-  item_specs: [
-    {
-      title: "Years Combined Experience",
-      value: "75",
-      sufix: "+",
-    },
-    {
-      title: "High Net Worth Clients",
-      value: "1200",
-      sufix: "+",
-    },
-    {
-      title: "Countries Being Served",
-      value: "35",
-      sufix: "+",
-    },
-  ],
 };
 
 export default function Page() {
   return (
     <>
       <HeroSection />
-      <AboutSection data={local_data_about} />
+      <AboutSection data={local_data?.about_section} />
       <ServiceSection />
       <ReviewSection />
       <BlogSection />

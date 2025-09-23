@@ -309,7 +309,7 @@ export default function Header() {
 
 function MegaNavigationMenubar() {
   const menuItems = [
-    { label: "The Alternatives Approach", href: "/" },
+    { label: "The Alternatives Approach", href: "/alternatives-approach" },
     { label: "Mainstream Services", href: "/" },
     { label: "About Us", href: "/about" },
     { label: "Testimonials", href: "/" },

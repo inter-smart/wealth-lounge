@@ -21,7 +21,7 @@ export default function MiviSection({ data = local_data }) {
       <div className="container">
         <div className="flex flex-wrap -mx-[10px] md:-mx-[15px] xl:-mx-[20px] 2xl:-mx-[25px] [&>*]:px-[10px] sm:[&>*]:px-[15px] xl:[&>*]:px-[20px] 2xl:[&>*]:px-[25px]">
           {data?.map((item, index) => (
-            <div key={"mivi-item" + index} className="w-full sm:w-1/2">
+            <div key={"mivi-item" + index} className="w-full sm:w-1/2 max-sm:py-[10px]">
               <div className="w-full h-full bg-[#fffbf4] p-[15px_20px] sm:p-[20px_30px] xl:p-[30px_40px] 2xl:p-[50px_55px]">
                 <div>
                   <Heading

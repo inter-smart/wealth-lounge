@@ -1,10 +1,59 @@
-import DrivesSection from "@/components/blocks/about/drives-section";
-import MiviSection from "@/components/blocks/about/mivi-section";
-import TeamSection from "@/components/blocks/about/team-section";
-import AboutSection from "@/components/blocks/home/about-section";
+import dynamic from "next/dynamic";
+
 import InnerHero from "@/components/common/inner-hero";
 
+// Dynamic imports with SSR enabled for better performance
+const AboutSection = dynamic(
+  () => import("@/components/blocks/home/about-section"),
+  {
+    ssr: true,
+    loading: () => <p>Loading...</p>,
+  }
+);
+const MiviSection = dynamic(
+  () => import("@/components/blocks/about/mivi-section"),
+  {
+    ssr: true,
+    loading: () => <p>Loading...</p>,
+  }
+);
+const DrivesSection = dynamic(
+  () => import("@/components/blocks/about/drives-section"),
+  {
+    ssr: true,
+    loading: () => <p>Loading...</p>,
+  }
+);
+const TeamSection = dynamic(
+  () => import("@/components/blocks/about/team-section"),
+  {
+    ssr: true,
+    loading: () => <p>Loading...</p>,
+  }
+);
+
 const local_data = {
+  breadcrumb: [
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+  ],
+  hero_section: {
+    background_media: {
+      mobile: {
+        type: "image",
+        path: "/images/about-hero-1.jpg",
+        alt: "hero",
+      },
+      desktop: {
+        type: "image",
+        path: "/images/about-hero-1.jpg",
+        alt: "hero",
+      },
+    },
+    title: "About",
+    description:
+      "<p>Empowering Generations with Legacy-Focused Financial Strategies</p>",
+  },
   about_section: {
     media: {
       type: "image",
@@ -42,80 +91,173 @@ const local_data = {
     button: null,
     item_list: [
       {
+        id: 1,
         media: {
           type: "image",
           path: "/images/about-team-1.jpg",
           alt: "team-item",
         },
         title: "Sandeep Ghosh",
-        description:
+        short_description:
           "<p>Founder and CEO, UK Qualified Independent Financial Adviser, Tax and Pensions Specialist, and Author</p>",
+        description:
+          "<p>Sandeep’s base of high net-worth, family office and corporate clients stretches from the Middle East to Europe and the Far East. The Wealth Lounge was founded by Sandeep as a result of the disenchantment felt by many investors with the global markets and their lack of consistency. Today, The Wealth Lounge operates as a fully functional wealth management brokerage, with a strong focus on alternative assets such as generic private equity, gold exploration, real estate, REIT, and structured income products. There is a continuous effort to bring new asset classes into the fore, the latest major vertical being media and content, alongside emerging assets such as wine and fine art.</p>",
         social_link: [
           {
-            icon: "images/icon-light-linkedin.svg",
+            icon: "/images/icon-light-linkedin.svg",
             label: "linkedin",
             link: "/",
           },
           {
-            icon: "images/icon-light-fb.svg",
+            icon: "/images/icon-light-fb.svg",
             label: "fb",
             link: "/",
           },
         ],
       },
       {
+        id: 2,
         media: {
           type: "image",
           path: "/images/about-team-2.jpg",
           alt: "team-item",
         },
         title: "Neil Ghosh",
-        description: "<p>Head of Business Development, UK & Europe</p>",
+        short_description: "<p>Head of Business Development, UK & Europe</p>",
+        description:
+          "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur mollitia earum dolore minima veniam amet quasi libero veritatis ratione perferendis fugit repellat, suscipit explicabo ut dignissimos asperiores quaerat architecto! Autem atque repellat, non ullam culpa obcaecati sed dolores, corrupti veritatis animi tenetur dolorum aliquid maiores. Voluptas id alias culpa voluptatum deleniti beatae animi adipisci perferendis, nesciunt iste, rerum aut necessitatibus explicabo dolor ratione dolores ipsam minus distinctio repudiandae consequuntur assumenda repellendus doloremque quibusdam! Quaerat aperiam officiis eos iure eligendi sapiente fugiat. At ipsa quam recusandae. Soluta sint excepturi porro eius rerum assumenda minus enim libero alias? Suscipit doloremque tempora quae.</p><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur mollitia earum dolore minima veniam amet quasi libero veritatis ratione perferendis fugit repellat, suscipit explicabo ut dignissimos asperiores quaerat architecto! Autem atque repellat, non ullam culpa obcaecati sed dolores, corrupti veritatis animi tenetur dolorum aliquid maiores. Voluptas id alias culpa voluptatum deleniti beatae animi adipisci perferendis, nesciunt iste, rerum aut necessitatibus explicabo dolor ratione dolores ipsam minus distinctio repudiandae consequuntur assumenda repellendus doloremque quibusdam! Quaerat aperiam officiis eos iure eligendi sapiente fugiat. At ipsa quam recusandae. Soluta sint excepturi porro eius rerum assumenda minus enim libero alias? Suscipit doloremque tempora quae.</p><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur mollitia earum dolore minima veniam amet quasi libero veritatis ratione perferendis fugit repellat, suscipit explicabo ut dignissimos asperiores quaerat architecto! Autem atque repellat, non ullam culpa obcaecati sed dolores, corrupti veritatis animi tenetur dolorum aliquid maiores. Voluptas id alias culpa voluptatum deleniti beatae animi adipisci perferendis, nesciunt iste, rerum aut necessitatibus explicabo dolor ratione dolores ipsam minus distinctio repudiandae consequuntur assumenda repellendus doloremque quibusdam! Quaerat aperiam officiis eos iure eligendi sapiente fugiat. At ipsa quam recusandae. Soluta sint excepturi porro eius rerum assumenda minus enim libero alias? Suscipit doloremque tempora quae.</p>",
+        social_link: [
+          {
+            icon: "/images/icon-light-linkedin.svg",
+            label: "linkedin",
+            link: "/",
+          },
+          {
+            icon: "/images/icon-light-fb.svg",
+            label: "fb",
+            link: "/",
+          },
+        ],
       },
       {
+        id: 3,
         media: {
           type: "image",
           path: "/images/about-team-3.jpg",
           alt: "team-item",
         },
         title: "Amanda Tolentino",
-        description: "Personal Assistant to Sandeep Ghosh",
+        short_description: "Personal Assistant to Sandeep Ghosh",
+        description:
+          "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur mollitia earum dolore minima veniam amet quasi libero veritatis ratione perferendis fugit repellat, suscipit explicabo ut dignissimos asperiores quaerat architecto! Autem atque repellat, non ullam culpa obcaecati sed dolores, corrupti veritatis animi tenetur dolorum aliquid maiores. Voluptas id alias culpa voluptatum deleniti beatae animi adipisci perferendis, nesciunt iste, rerum aut necessitatibus explicabo dolor ratione dolores ipsam minus distinctio repudiandae consequuntur assumenda repellendus doloremque quibusdam! Quaerat aperiam officiis eos iure eligendi sapiente fugiat. At ipsa quam recusandae. Soluta sint excepturi porro eius rerum assumenda minus enim libero alias? Suscipit doloremque tempora quae.</p>",
+        social_link: [
+          {
+            icon: "/images/icon-light-linkedin.svg",
+            label: "linkedin",
+            link: "/",
+          },
+          {
+            icon: "/images/icon-light-fb.svg",
+            label: "fb",
+            link: "/",
+          },
+        ],
       },
       {
+        id: 4,
         media: {
           type: "image",
           path: "/images/about-team-4.jpg",
           alt: "team-item",
         },
         title: "Claude Paul Chineegadoo",
-        description: "<p>Head of Social and Corporate Responsibility</p>",
+        short_description: "<p>Head of Social and Corporate Responsibility</p>",
+        description:
+          "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur mollitia earum dolore minima veniam amet quasi libero veritatis ratione perferendis fugit repellat, suscipit explicabo ut dignissimos asperiores quaerat architecto! Autem atque repellat, non ullam culpa obcaecati sed dolores, corrupti veritatis animi tenetur dolorum aliquid maiores. Voluptas id alias culpa voluptatum deleniti beatae animi adipisci perferendis, nesciunt iste, rerum aut necessitatibus explicabo dolor ratione dolores ipsam minus distinctio repudiandae consequuntur assumenda repellendus doloremque quibusdam! Quaerat aperiam officiis eos iure eligendi sapiente fugiat. At ipsa quam recusandae. Soluta sint excepturi porro eius rerum assumenda minus enim libero alias? Suscipit doloremque tempora quae.</p>",
+        social_link: [
+          {
+            icon: "/images/icon-light-linkedin.svg",
+            label: "linkedin",
+            link: "/",
+          },
+          {
+            icon: "/images/icon-light-fb.svg",
+            label: "fb",
+            link: "/",
+          },
+        ],
       },
       {
+        id: 5,
         media: {
           type: "image",
           path: "/images/about-team-5.jpg",
           alt: "team-item",
         },
         title: "Hitesh Maggu",
-        description: "<p>Partner, India</p>",
+        short_description: "<p>Partner, India</p>",
+        description:
+          "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur mollitia earum dolore minima veniam amet quasi libero veritatis ratione perferendis fugit repellat, suscipit explicabo ut dignissimos asperiores quaerat architecto! Autem atque repellat, non ullam culpa obcaecati sed dolores, corrupti veritatis animi tenetur dolorum aliquid maiores. Voluptas id alias culpa voluptatum deleniti beatae animi adipisci perferendis, nesciunt iste, rerum aut necessitatibus explicabo dolor ratione dolores ipsam minus distinctio repudiandae consequuntur assumenda repellendus doloremque quibusdam! Quaerat aperiam officiis eos iure eligendi sapiente fugiat. At ipsa quam recusandae. Soluta sint excepturi porro eius rerum assumenda minus enim libero alias? Suscipit doloremque tempora quae.</p>",
+        social_link: [
+          {
+            icon: "/images/icon-light-linkedin.svg",
+            label: "linkedin",
+            link: "/",
+          },
+          {
+            icon: "/images/icon-light-fb.svg",
+            label: "fb",
+            link: "/",
+          },
+        ],
       },
       {
+        id: 6,
         media: {
           type: "image",
           path: "/images/about-team-4.jpg",
           alt: "team-item",
         },
         title: "Claude Paul Chineegadoo",
-        description: "<p>Head of Social and Corporate Responsibility</p>",
+        short_description: "<p>Head of Social and Corporate Responsibility</p>",
+        description:
+          "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur mollitia earum dolore minima veniam amet quasi libero veritatis ratione perferendis fugit repellat, suscipit explicabo ut dignissimos asperiores quaerat architecto! Autem atque repellat, non ullam culpa obcaecati sed dolores, corrupti veritatis animi tenetur dolorum aliquid maiores. Voluptas id alias culpa voluptatum deleniti beatae animi adipisci perferendis, nesciunt iste, rerum aut necessitatibus explicabo dolor ratione dolores ipsam minus distinctio repudiandae consequuntur assumenda repellendus doloremque quibusdam! Quaerat aperiam officiis eos iure eligendi sapiente fugiat. At ipsa quam recusandae. Soluta sint excepturi porro eius rerum assumenda minus enim libero alias? Suscipit doloremque tempora quae.</p>",
+        social_link: [
+          {
+            icon: "/images/icon-light-linkedin.svg",
+            label: "linkedin",
+            link: "/",
+          },
+          {
+            icon: "/images/icon-light-fb.svg",
+            label: "fb",
+            link: "/",
+          },
+        ],
       },
       {
+        id: 7,
         media: {
           type: "image",
           path: "/images/about-team-5.jpg",
           alt: "team-item",
         },
         title: "Hitesh Maggu",
-        description: "<p>Partner, India</p>",
+        short_description: "<p>Partner, India</p>",
+        description:
+          "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur mollitia earum dolore minima veniam amet quasi libero veritatis ratione perferendis fugit repellat, suscipit explicabo ut dignissimos asperiores quaerat architecto! Autem atque repellat, non ullam culpa obcaecati sed dolores, corrupti veritatis animi tenetur dolorum aliquid maiores. Voluptas id alias culpa voluptatum deleniti beatae animi adipisci perferendis, nesciunt iste, rerum aut necessitatibus explicabo dolor ratione dolores ipsam minus distinctio repudiandae consequuntur assumenda repellendus doloremque quibusdam! Quaerat aperiam officiis eos iure eligendi sapiente fugiat. At ipsa quam recusandae. Soluta sint excepturi porro eius rerum assumenda minus enim libero alias? Suscipit doloremque tempora quae.</p>",
+        social_link: [
+          {
+            icon: "/images/icon-light-linkedin.svg",
+            label: "linkedin",
+            link: "/",
+          },
+          {
+            icon: "/images/icon-light-fb.svg",
+            label: "fb",
+            link: "/",
+          },
+        ],
       },
     ],
   },
@@ -132,8 +274,22 @@ const local_data = {
           alt: "advisory-item",
         },
         title: "Peter Kyprianou",
-        description:
+        short_description:
           "Director, UK Property Accountants (UKPA) | (UK GENERAL AND PROPERTY TAX)",
+        description:
+          "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur mollitia earum dolore minima veniam amet quasi libero veritatis ratione perferendis fugit repellat, suscipit explicabo ut dignissimos asperiores quaerat architecto! Autem atque repellat, non ullam culpa obcaecati sed dolores, corrupti veritatis animi tenetur dolorum aliquid maiores. Voluptas id alias culpa voluptatum deleniti beatae animi adipisci perferendis, nesciunt iste, rerum aut necessitatibus explicabo dolor ratione dolores ipsam minus distinctio repudiandae consequuntur assumenda repellendus doloremque quibusdam! Quaerat aperiam officiis eos iure eligendi sapiente fugiat. At ipsa quam recusandae. Soluta sint excepturi porro eius rerum assumenda minus enim libero alias? Suscipit doloremque tempora quae.</p>",
+        social_link: [
+          {
+            icon: "/images/icon-light-linkedin.svg",
+            label: "linkedin",
+            link: "/",
+          },
+          {
+            icon: "/images/icon-light-fb.svg",
+            label: "fb",
+            link: "/",
+          },
+        ],
       },
       {
         media: {
@@ -142,7 +298,21 @@ const local_data = {
           alt: "advisory-item",
         },
         title: "George Chedid",
-        description: "Managing Partner, 3RT Smart Gold Holdings",
+        short_description: "Managing Partner, 3RT Smart Gold Holdings",
+        description:
+          "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur mollitia earum dolore minima veniam amet quasi libero veritatis ratione perferendis fugit repellat, suscipit explicabo ut dignissimos asperiores quaerat architecto! Autem atque repellat, non ullam culpa obcaecati sed dolores, corrupti veritatis animi tenetur dolorum aliquid maiores. Voluptas id alias culpa voluptatum deleniti beatae animi adipisci perferendis, nesciunt iste, rerum aut necessitatibus explicabo dolor ratione dolores ipsam minus distinctio repudiandae consequuntur assumenda repellendus doloremque quibusdam! Quaerat aperiam officiis eos iure eligendi sapiente fugiat. At ipsa quam recusandae. Soluta sint excepturi porro eius rerum assumenda minus enim libero alias? Suscipit doloremque tempora quae.</p>",
+        social_link: [
+          {
+            icon: "/images/icon-light-linkedin.svg",
+            label: "linkedin",
+            link: "/",
+          },
+          {
+            icon: "/images/icon-light-fb.svg",
+            label: "fb",
+            link: "/",
+          },
+        ],
       },
       {
         media: {
@@ -151,7 +321,22 @@ const local_data = {
           alt: "advisory-item",
         },
         title: "Johnny Conran",
-        description: "Partner, Head of Middle East and Africa, Joseph Mews",
+        short_description:
+          "Partner, Head of Middle East and Africa, Joseph Mews",
+        description:
+          "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur mollitia earum dolore minima veniam amet quasi libero veritatis ratione perferendis fugit repellat, suscipit explicabo ut dignissimos asperiores quaerat architecto! Autem atque repellat, non ullam culpa obcaecati sed dolores, corrupti veritatis animi tenetur dolorum aliquid maiores. Voluptas id alias culpa voluptatum deleniti beatae animi adipisci perferendis, nesciunt iste, rerum aut necessitatibus explicabo dolor ratione dolores ipsam minus distinctio repudiandae consequuntur assumenda repellendus doloremque quibusdam! Quaerat aperiam officiis eos iure eligendi sapiente fugiat. At ipsa quam recusandae. Soluta sint excepturi porro eius rerum assumenda minus enim libero alias? Suscipit doloremque tempora quae.</p>",
+        social_link: [
+          {
+            icon: "/images/icon-light-linkedin.svg",
+            label: "linkedin",
+            link: "/",
+          },
+          {
+            icon: "/images/icon-light-fb.svg",
+            label: "fb",
+            link: "/",
+          },
+        ],
       },
       {
         media: {
@@ -160,16 +345,34 @@ const local_data = {
           alt: "advisory-item",
         },
         title: "Sophia Kazmi",
-        description:
+        short_description:
           "Director | International Mortgage Consultant, Maidwell Group",
+        description:
+          "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur mollitia earum dolore minima veniam amet quasi libero veritatis ratione perferendis fugit repellat, suscipit explicabo ut dignissimos asperiores quaerat architecto! Autem atque repellat, non ullam culpa obcaecati sed dolores, corrupti veritatis animi tenetur dolorum aliquid maiores. Voluptas id alias culpa voluptatum deleniti beatae animi adipisci perferendis, nesciunt iste, rerum aut necessitatibus explicabo dolor ratione dolores ipsam minus distinctio repudiandae consequuntur assumenda repellendus doloremque quibusdam! Quaerat aperiam officiis eos iure eligendi sapiente fugiat. At ipsa quam recusandae. Soluta sint excepturi porro eius rerum assumenda minus enim libero alias? Suscipit doloremque tempora quae.</p>",
+        social_link: [
+          {
+            icon: "/images/icon-light-linkedin.svg",
+            label: "linkedin",
+            link: "/",
+          },
+          {
+            icon: "/images/icon-light-fb.svg",
+            label: "fb",
+            link: "/",
+          },
+        ],
       },
     ],
   },
 };
-export default function page() {
+
+export default function Page() {
   return (
     <>
-      <InnerHero />
+      <InnerHero
+        data={local_data?.hero_section}
+        breadcrumb={local_data?.breadcrumb}
+      />
       <AboutSection variant="about" data={local_data?.about_section} />
       <MiviSection />
       <DrivesSection />

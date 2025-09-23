@@ -14,26 +14,9 @@ import {
 } from "@/components/ui/breadcrumb";
 
 import * as motion from "motion/react-client";
+import React from "react";
 
-const heroData = {
-  background_media: {
-    mobile: {
-      type: "image",
-      path: "/images/about-hero-1.jpg",
-      alt: "hero",
-    },
-    desktop: {
-      type: "image",
-      path: "/images/about-hero-1.jpg",
-      alt: "hero",
-    },
-  },
-  title: "About",
-  description:
-    "<p>Empowering Generations with Legacy-Focused Financial Strategies</p>",
-};
-
-export default function InnerHero({ data = heroData, childern }) {
+export default function InnerHero({ data, breadcrumb }) {
   return (
     <section className="w-full h-auto min-h-[320px] xl:min-h-[376px] 2xl:min-h-[468px] 3xl:min-h-[576px] flex items-center bg-black py-[calc(40px+var(--header-y))_40px] sm:py-[calc(60px+var(--header-y))_60px] xl:py-[calc(100px+var(--header-y))_100px] 2xl:py-[calc(120px+var(--header-y))_120px] relative z-0">
       <div className="w-full h-full absolute -z-1 inset-0 bg-gradient-to-b from-black via-black/50 to-black opacity-65 pointer-events-none" />
@@ -68,16 +51,26 @@ export default function InnerHero({ data = heroData, childern }) {
 
       <div className="container">
         <div className="justify-center flex flex-wrap max-sm:flex-col-reverse max-sm:items-center relative z-0">
-          <div className="w-full sm:max-w-[320px] xl:max-w-[468px] 2xl:max-w-[576px]">
+          <div className="w-full max-w-[320px] sm:max-w-[320px] xl:max-w-[768px] 2xl:max-w-[1024px]">
             <Breadcrumb className="mx-auto flex justify-center">
               <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/">Home</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>About</BreadcrumbPage>
-                </BreadcrumbItem>
+                {breadcrumb.map((item, i) => {
+                  const isLast = i === breadcrumb.length - 1;
+                  return (
+                    <React.Fragment key={i}>
+                      <BreadcrumbItem>
+                        {isLast ? (
+                          <BreadcrumbPage>{item.label}</BreadcrumbPage>
+                        ) : (
+                          <BreadcrumbLink href={item.href}>
+                            {item.label}
+                          </BreadcrumbLink>
+                        )}
+                      </BreadcrumbItem>
+                      {!isLast && <BreadcrumbSeparator />}
+                    </React.Fragment>
+                  );
+                })}
               </BreadcrumbList>
             </Breadcrumb>
             <Heading
@@ -96,7 +89,6 @@ export default function InnerHero({ data = heroData, childern }) {
                 {parse(data?.description)}
               </Text>
             )}
-            {childern}
           </div>
         </div>
       </div>
