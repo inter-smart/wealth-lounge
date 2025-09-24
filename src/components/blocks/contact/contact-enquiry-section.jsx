@@ -74,11 +74,11 @@ export default function ContactEnquirySection({ data = local_data }) {
             </div>
           </div>
           <div className="w-full sm:w-1/2 md:w-1/2">
-            <div className="group w-full h-auto xl:min-h-[540px] 2xl:min-h-[650px] bg-[#141414] relative z-0 p-[25px_20px_40px] sm:p-[35px_30px_80px] xl:p-[50px_60px_100px] 2xl:p-[70px_80px_120px]">
+            <div className="group w-full h-full xl:min-h-[540px] 2xl:min-h-[620px] 3xl:min-h-[768px] bg-[#141414] relative z-0 p-[25px_20px_40px] sm:p-[35px_30px_80px] xl:p-[50px_60px_100px] 2xl:p-[80px_80px_120px] 3xl:p-[100px_80px_140px]">
               <Heading
                 as="h2"
                 size="heading2"
-                className="text-[18px] sm:text-[20px] lg:text-[22px] xl:text-[26px] 2xl:text-[32px] 3xl:text-[40px] leading-tight font-extralight font-brownede text-center text-white mb-[15px] xl:mb-[20px] 2xl:mb-[30px]"
+                className="text-[18px] sm:text-[20px] lg:text-[22px] xl:text-[26px] 2xl:text-[32px] 3xl:text-[40px] leading-tight font-extralight font-brownede text-center text-white mb-[15px] xl:mb-[20px] 2xl:mb-[30px] 3xl:mb-[50px]"
               >
                 {data?.form_title}
               </Heading>

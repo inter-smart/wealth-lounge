@@ -160,11 +160,11 @@ export default function ContactEnquiryForm() {
         />
 
         {/* Submit Button */}
-        <div className="w-full mt-[5px] xl:mt-[10px] flex">
+        <div className="w-full mt-[5px] xl:mt-[10px] 2xl:mt-[20px] flex">
           <Button
             type="submit"
             variant="outline"
-            className={"max-w-[120px] xl:max-w-[140px] mx-auto"}
+            className={"max-w-[120px] xl:max-w-[140px] 2xl:max-w-[180px] mx-auto"}
             animate={false}
           >
             Submit Enquiry

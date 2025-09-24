@@ -67,7 +67,7 @@ export default function ContactInfoSection({ data = local_data }) {
                 key={"contact-info-item" + index}
                 className="w-full sm:w-1/2 md:w-1/3 relative z-0"
               >
-                <div className="w-full h-auto block">
+                <div className="w-full h-auto block max-sm:max-w-[468px] max-sm:mx-auto">
                   <div className="w-[40px] xl:w-[50px] 2xl:w-[70px] aspect-square mx-auto mb-[10px] xl:mb-[15px] 2xl:mb-[20px] overflow-hidden">
                     <Image
                       src={item?.media?.path}
