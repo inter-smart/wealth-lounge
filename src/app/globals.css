@@ -255,7 +255,7 @@
     }
 
     & > * {
-      @apply my-[10px] lg:my-[15px];
+      @apply my-[10px] xl:my-[15px];
     }
 
     p,

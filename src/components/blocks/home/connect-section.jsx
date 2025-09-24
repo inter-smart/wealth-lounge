@@ -1,7 +1,7 @@
 import { Heading } from "@/components/utils/heading";
 import Image from "next/image";
 import parse from "html-react-parser";
-import EnquiryForm from "@/components/forms/enquiry-form";
+import EnquiryForm from "@/components/form/enquiry-form";
 
 const local_data = {
   media: null,

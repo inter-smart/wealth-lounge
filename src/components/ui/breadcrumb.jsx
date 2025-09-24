@@ -79,6 +79,7 @@ function BreadcrumbSeparator({ children, className, ...props }) {
           alt="breadcrumb"
           width={15}
           height={15}
+          unoptimized
           className="w-[10px] sm:w-[12px] object-contain"
         />
       )}

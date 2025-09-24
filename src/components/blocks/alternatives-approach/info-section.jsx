@@ -173,19 +173,10 @@ const local_data = {
 
 export default function InfoSection({ data = local_data }) {
   return (
-    <section className="w-full h-auto block pt-[30px] sm:pt-[40px] xl:pt-[50px] 2xl:pt-[70px] relative z-0">
-      {/* {variant === "about" && (
-        <Image
-          src="/images/about-about-bg.png"
-          alt="about-about-bg"
-          width={436}
-          height={467}
-          className="w-[200px] xl:w-[276px] 2xl:w-[320px] 3xl:w-[420px] opacity-10 absolute -z-1 top-[-20px] sm:top-[-30px] xl:top-[-40px] right-[6%] xl:right-[calc((100%-var(--container-xl))/2)] 2xl:right-[calc((100%-var(--container-2xl))/2)] 3xl:right-[calc((100%-var(--container-3xl))/2)] mr-4"
-        />
-      )} */}
+    <section className="w-full h-auto block pt-[30px] sm:pt-[40px] xl:pt-[60px] 2xl:pt-[80px] overflow-hidden relative z-0">
       <div className="container">
-        <div className="flex flex-wrap sm:items-center -mx-[15px] md:-mx-[20px] xl:-mx-[30px] 2xl:-mx-[40px] [&>*]:p-[15px] md:[&>*]:p-[20px] xl:[&>*]:p-[40px_30px] 2xl:[&>*]:p-[50px_40px]">
-          <div className="w-full sm:w-[calc(100%-220px)] md:w-[calc(100%-300px)] xl:w-[calc(100%-520px)] 2xl:w-[calc(100%-576px)] 3xl:w-[calc(100%-768px)] max-sm:mb-[20px]">
+        <div className="flex flex-wrap sm:items-center sm:-mx-[15px] md:-mx-[20px] xl:-mx-[30px] 2xl:-mx-[40px] sm:[&>*]:p-[15px] md:[&>*]:p-[20px] xl:[&>*]:p-[40px_30px] 2xl:[&>*]:p-[50px_40px]">
+          <div className="w-full sm:w-[calc(100%-220px)] md:w-[calc(100%-300px)] xl:w-[calc(100%-520px)] 2xl:w-[calc(100%-576px)] 3xl:w-[calc(100%-768px)]">
             <div className="w-full">
               <Heading
                 as="h2"
@@ -207,7 +198,7 @@ export default function InfoSection({ data = local_data }) {
             </div>
           </div>
           <div className="w-full sm:w-[220px] md:w-[300px] xl:w-[520px] 2xl:w-[576px] 3xl:w-[768px]">
-            <div className="w-full h-auto aspect-[70/32] sm:aspect-[70/32] overflow-hidden max-sm:max-w-1/2">
+            <div className="w-full h-auto aspect-[70/32] overflow-hidden max-sm:my-[20px]">
               <Image
                 src={data?.media?.path}
                 alt={data?.media?.alt}
@@ -221,15 +212,6 @@ export default function InfoSection({ data = local_data }) {
         <hr className="border-primary" />
       </div>
 
-      <div className="container pt-[30px] sm:pt-[40px] xl:pt-[50px] 2xl:pt-[70px]">
-        <Heading
-          as="h2"
-          size="heading2"
-          className="text-primary mb-[5px] xl:mb-[10px]"
-        >
-          {data?.types?.title}
-        </Heading>
-      </div>
       {data?.types?.item_list?.map((item, index) => (
         <div
           key={"types-item" + index}
@@ -242,17 +224,28 @@ export default function InfoSection({ data = local_data }) {
               className={`flex flex-wrap sm:items-center -mx-[15px] md:-mx-[20px] xl:-mx-[30px] 2xl:-mx-[40px] [&>*]:p-[15px] md:[&>*]:p-[20px] xl:[&>*]:p-[30px] 2xl:[&>*]:p-[40px]
                 ${
                   index % 2 === 0
-                    ? "flex-row-reverse"
+                    ? "flex-row-reverse sm:flex-row-reverse"
                     : "flex-row-reverse sm:flex-row"
                 }
                 `}
             >
-              <div className="w-full sm:w-[calc(100%-220px)] md:w-[calc(100%-300px)] xl:w-[calc(100%-520px)] 2xl:w-[calc(100%-576px)] 3xl:w-[calc(100%-768px)] max-sm:mb-[20px]">
+              {index === 0 && (
                 <div className="w-full">
                   <Heading
                     as="h2"
                     size="heading2"
-                    className="text-primary mb-[10px] xl:mb-[15px] 2xl:mb-[20px]"
+                    className="text-primary -mb-[10px] xl:-mb-[15px]"
+                  >
+                    {data?.types?.title}
+                  </Heading>
+                </div>
+              )}
+              <div className="w-full sm:w-[calc(100%-220px)] md:w-[calc(100%-300px)] xl:w-[calc(100%-520px)] 2xl:w-[calc(100%-576px)] 3xl:w-[calc(100%-768px)]">
+                <div className="w-full">
+                  <Heading
+                    as="h2"
+                    size="heading2"
+                    className="text-primary mb-[10px] xl:mb-[15px] 2xl:mb-[20px] max-sm:text-[18px]"
                   >
                     {item?.title}
                   </Heading>
@@ -265,7 +258,9 @@ export default function InfoSection({ data = local_data }) {
                     ${index % 2 === 0 ? "bg-[#fffbf4]" : "bg-white"}
                 `}
                     >
-                      {parse(item?.additional_description)}
+                      <div className="typography [&_ul]:pl-0 [&_ul>li]:list-none [&_*]:m-0">
+                        {parse(item?.additional_description)}
+                      </div>
                     </div>
                   )}
                   {item?.button && (
@@ -293,11 +288,25 @@ export default function InfoSection({ data = local_data }) {
               </div>
               <div className="w-full sm:w-[220px] md:w-[300px] xl:w-[520px] 2xl:w-[576px] 3xl:w-[768px]">
                 <div
-                  className={`w-full xl:h-[576px] 2xl:h-[768px] flex flex-wrap items-end gap-[5%]
+                  className={`w-full h-[340px] sm:h-[420px] md:h-[468px] xl:h-[576px] 2xl:h-[768px] relative z-0 flex flex-wrap items-end gap-[2%] xl:gap-[5%] max-sm:max-w-[468px]
                 ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"}
                 `}
                 >
-                  <div className="w-full max-w-[43%] h-full overflow-hidden max-sm:max-w-1/2">
+                  <Image
+                    src="/images/alternatives-loop-bg.svg"
+                    alt="alternatives-loop-bg"
+                    width={332}
+                    height={356}
+                    unoptimized
+                    className={`w-[120px] sm:w-[176px] xl:w-[220px] 2xl:w-[320px] object-cover absolute -z-1 hover:scale-140 hover:opacity-50 transition
+                      ${
+                        index % 2 === 0
+                          ? "top-0 right-0 -translate-y-1/10 translate-x-1/4 "
+                          : "top-0 left-0 -translate-y-1/10 -translate-x-1/3 "
+                      }
+                      `}
+                  />
+                  <div className="w-full max-w-[43%] h-full overflow-hidden">
                     <Image
                       src={item?.primary_media?.path}
                       alt={item?.primary_media?.alt}
@@ -306,7 +315,7 @@ export default function InfoSection({ data = local_data }) {
                       className="w-full h-full object-cover hover:scale-105 transition"
                     />
                   </div>
-                  <div className="w-full max-w-[52%] h-[90%] mt-[10%] overflow-hidden max-sm:max-w-1/2">
+                  <div className="w-full max-w-[55%] xl:max-w-[52%] h-[90%] overflow-hidden">
                     <Image
                       src={item?.secondary_media?.path}
                       alt={item?.secondary_media?.alt}

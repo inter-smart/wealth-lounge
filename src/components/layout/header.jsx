@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "../ui/button";
 import { Heading } from "../utils/heading";
+import useMedia from "use-media";
 
 const headerData = {
   brand: {
@@ -174,6 +175,8 @@ export default function Header() {
 
   const [open, setOpen] = useState(false);
 
+  const isDesktop = useMedia({ minWidth: "640px" });
+
   // expo3 async function getGlobalData() {
   //   const res = await fetch("http://localhost:1337/api/global?populate=*", {
   //     headers: {
@@ -217,10 +220,11 @@ export default function Header() {
         transition={{
           duration: 0.2,
         }}
-        className={`w-full h-[var(--header-y)] fixed z-50 top-0 inset-x-0 flex items-center
+        className={`w-full h-[var(--header-y)]  z-50 top-0 inset-x-0 flex items-center
           ${
-            bg &&
-            "border-b border-white/10 bg-black/80 shadow-[0px_10px_4px_0px_rgba(0,0,0,0.1)] backdrop-blur-sm"
+            bg
+              ? "border-b border-white/10 bg-black/80 shadow-[0px_10px_4px_0px_rgba(0,0,0,0.1)] backdrop-blur-sm fixed"
+              : "absolute"
           }
           `}
       >
@@ -240,6 +244,7 @@ export default function Header() {
                   alt="logo"
                   width={257}
                   height={101}
+                  unoptimized
                   className="w-full h-full"
                 />
               </Link>
@@ -249,9 +254,11 @@ export default function Header() {
               ${bg && "scale-90"}
               `}
             >
-              <div className="hidden lg:block">
-                <MegaNavigationMenubar />
-              </div>
+              {isDesktop && (
+                <div className="hidden lg:block">
+                  <MegaNavigationMenubar />
+                </div>
+              )}
               <div>
                 <Button
                   variant="outline"
@@ -261,44 +268,49 @@ export default function Header() {
                   <Link href="/">Login</Link>
                 </Button>
               </div>
-              <div className="lg:hidden">
-                <Sheet open={open} onOpenChange={setOpen}>
-                  <SheetTrigger>
-                    <div className="text-[12px] leading-none font-normal text-center text-white w-full flex items-center justify-center ">
-                      <Image
-                        src="/images/header-hamburger.svg"
-                        alt="hamburger"
-                        width={24}
-                        height={10}
-                        className="w-[15px] mr-[6px]"
-                      />
-                      <span>Menu</span>
-                    </div>
-                  </SheetTrigger>
-                  <SheetContent className="w-[320px] bg-[#030303]">
-                    <SheetHeader>
-                      <SheetTitle className={"sr-only"}>navigations</SheetTitle>
-                      <SheetDescription className={"sr-only"}>
-                        navigations
-                      </SheetDescription>
+              {!isDesktop && (
+                <div className="lg:hidden">
+                  <Sheet open={open} onOpenChange={setOpen}>
+                    <SheetTrigger>
+                      <div className="text-[12px] leading-none font-normal text-center text-white w-full flex items-center justify-center ">
+                        <Image
+                          src="/images/header-hamburger.svg"
+                          alt="hamburger"
+                          width={24}
+                          height={10}
+                          unoptimized
+                          className="w-[15px] mr-[6px]"
+                        />
+                        <span>Menu</span>
+                      </div>
+                    </SheetTrigger>
+                    <SheetContent className="w-[320px] bg-[#030303]">
+                      <SheetHeader>
+                        <SheetTitle className={"sr-only"}>
+                          navigations
+                        </SheetTitle>
+                        <SheetDescription className={"sr-only"}>
+                          navigations
+                        </SheetDescription>
 
-                      <AnimatePresence mode="wait">
-                        {open && (
-                          <motion.div
-                            key="menu-anim"
-                            variants={containerVariants}
-                            initial="hidden"
-                            animate="show"
-                            exit="exit"
-                          >
-                            <MegaNavigationMenubar />
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </SheetHeader>
-                  </SheetContent>
-                </Sheet>
-              </div>
+                        <AnimatePresence mode="wait">
+                          {open && (
+                            <motion.div
+                              key="menu-anim"
+                              variants={containerVariants}
+                              initial="hidden"
+                              animate="show"
+                              exit="exit"
+                            >
+                              <MegaNavigationMenubar />
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </SheetHeader>
+                    </SheetContent>
+                  </Sheet>
+                </div>
+              )}
             </div>
           </div>
         </div>
