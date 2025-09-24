@@ -49,6 +49,9 @@ const textareaStyle = `
   .replace(/\s+/g, " ")
   .trim();
 
+const glowWrapperClass =
+  "w-full p-[1px] overflow-hidden relative z-0 after:content-[''] after:absolute after:-z-1 after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:scale-150 after:w-[200px] after:h-[200px] after:bg-white/60 after:rounded-full after:blur-[40px]";
+
 export default function ContactEnquiryForm() {
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -81,7 +84,7 @@ export default function ContactEnquiryForm() {
             <FormItem className="w-full">
               <FormLabel className="sr-only">Full Name*</FormLabel>
               <FormControl>
-                <div className="w-full p-[1px] overflow-hidden relative z-0 after:content-[''] after:absolute after:-z-1 after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:scale-150 after:w-[200px] after:h-[200px] after:bg-white/60 after:rounded-full after:blur-[40px]">
+                <div className={glowWrapperClass}>
                   <Input
                     className={inputStyle}
                     placeholder="Full Name*"
@@ -102,7 +105,7 @@ export default function ContactEnquiryForm() {
             <FormItem className="w-full">
               <FormLabel className="sr-only">Email*</FormLabel>
               <FormControl>
-                <div className="w-full p-[1px] overflow-hidden relative z-0 after:content-[''] after:absolute after:-z-1 after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:scale-150 after:w-[200px] after:h-[200px] after:bg-white/60 after:rounded-full after:blur-[40px]">
+                <div className={glowWrapperClass}>
                   <Input
                     className={inputStyle}
                     type="email"
@@ -124,7 +127,8 @@ export default function ContactEnquiryForm() {
             <FormItem className="w-full">
               <FormLabel className="sr-only">Phone*</FormLabel>
               <FormControl>
-              <div className="w-full p-[1px] overflow-hidden relative z-0 after:content-[''] after:absolute after:-z-1 after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:scale-150 after:w-[200px] after:h-[200px] after:bg-white/60 after:rounded-full after:blur-[40px]">
+              
+                <div className={glowWrapperClass}>
                 <Input
                   className={inputStyle}
                   type="tel"
@@ -146,7 +150,7 @@ export default function ContactEnquiryForm() {
             <FormItem className="w-full">
               <FormLabel className="sr-only">Message</FormLabel>
               <FormControl>
-                <div className="w-full p-[1px] overflow-hidden relative z-0 after:content-[''] after:absolute after:-z-1 after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:scale-150 after:w-[200px] after:h-[200px] after:bg-white/60 after:rounded-full after:blur-[40px]">
+                <div className={glowWrapperClass}>
                   <Textarea
                     className={textareaStyle}
                     placeholder="Message*"
@@ -164,7 +168,9 @@ export default function ContactEnquiryForm() {
           <Button
             type="submit"
             variant="outline"
-            className={"max-w-[120px] xl:max-w-[140px] 2xl:max-w-[180px] mx-auto"}
+            className={
+              "max-w-[120px] xl:max-w-[140px] 2xl:max-w-[180px] mx-auto"
+            }
             animate={false}
           >
             Submit Enquiry
