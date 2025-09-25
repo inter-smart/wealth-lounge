@@ -59,7 +59,7 @@ export default function DetailSection({ data = local_data }) {
             </div>
           </div>
           <div className="w-full sm:w-[25%]">
-
+              
           </div>
         </div>
       </div>

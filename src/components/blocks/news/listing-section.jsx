@@ -187,7 +187,7 @@ const local_data = {
   ],
 };
 
-export default function ListingSection({ data = local_data }) {
+export default function ListingSection({ data = local_data, variant = "default" }) {
   const [filter, setFilter] = useState("all");
   const filteredItems =
     filter === "all"
@@ -195,6 +195,15 @@ export default function ListingSection({ data = local_data }) {
       : data.item_list.filter((item) => item.category === filter);
   return (
     <section className="w-full h-auto block py-[30px] sm:py-[60px] xl:py-[90px] 2xl:py-[110px] bg-[#FFFBF4] relative z-0">
+      {variant === "about" && (
+        <Image
+          src="/images/about-about-bg.png"
+          alt="news-news-bg"
+          width={436}
+          height={467}
+          className="w-[200px] xl:w-[276px] 2xl:w-[320px] 3xl:w-[420px] opacity-10 absolute -z-1 top-[-20px] sm:top-[-30px] xl:top-[-40px] right-[6%] xl:right-[calc((100%-var(--container-xl))/2)] 2xl:right-[calc((100%-var(--container-2xl))/2)] 3xl:right-[calc((100%-var(--container-3xl))/2)] mr-4"
+        />
+      )}
       <div className="container">
         <div>
           <Heading
