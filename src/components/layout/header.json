@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_layout_headers",
+  "info": {
+    "displayName": "header"
+  },
+  "options": {},
+  "attributes": {
+    "brandLogo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "brandUrl": {
+      "type": "string"
+    },
+    "navigation": {
+      "type": "component",
+      "component": "utils.link",
+      "repeatable": true
+    },
+    "cta": {
+      "type": "component",
+      "component": "utils.link",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}
