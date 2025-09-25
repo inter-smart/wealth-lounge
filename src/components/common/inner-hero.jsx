@@ -51,7 +51,7 @@ export default function InnerHero({ data, breadcrumb }) {
 
       <div className="container">
         <div className="justify-center flex flex-wrap max-sm:flex-col-reverse max-sm:items-center relative z-0">
-          <div className="w-full max-w-[320px] sm:max-w-[320px] xl:max-w-[768px] 2xl:max-w-[1024px]">
+          <div className="w-full max-w-[320px] sm:max-w-[576px] xl:max-w-[768px] 2xl:max-w-[1024px]">
             <Breadcrumb className="mx-auto flex justify-center">
               <BreadcrumbList>
                 {breadcrumb.map((item, i) => {

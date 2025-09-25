@@ -175,7 +175,7 @@ export default function Header() {
 
   const [open, setOpen] = useState(false);
 
-  const isDesktop = useMedia({ minWidth: "640px" });
+  const isDesktop = useMedia({ minWidth: "1024px" });
 
   // expo3 async function getGlobalData() {
   //   const res = await fetch("http://localhost:1337/api/global?populate=*", {
@@ -220,7 +220,7 @@ export default function Header() {
         transition={{
           duration: 0.2,
         }}
-        className={`w-full h-[var(--header-y)]  z-50 top-0 inset-x-0 flex items-center
+        className={`w-full h-[var(--header-y)] z-10 top-0 inset-x-0 flex items-center
           ${
             bg
               ? "border-b border-white/10 bg-black/80 shadow-[0px_10px_4px_0px_rgba(0,0,0,0.1)] backdrop-blur-sm fixed"
@@ -325,7 +325,7 @@ function MegaNavigationMenubar() {
     { label: "The Alternatives Approach", href: "/alternatives-approach" },
     { label: "Mainstream Services", href: "/" },
     { label: "About Us", href: "/about" },
-    { label: "Testimonials", href: "/" },
+    { label: "Testimonials", href: "/testimonial" },
     { label: "News", href: "/news" },
     { label: "Contact", href: "/contact" },
   ];
