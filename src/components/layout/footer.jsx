@@ -128,8 +128,8 @@ export default function Footer({ data = local_data }) {
       <Image
         src="/images/footer-bg-1.png"
         alt="footer-bg-1"
-        width={575}
-        height={277}
+        width={868}
+        height={419}
         className="w-[376px] sm:w-[468px] xl:w-[576px] 2xl:w-[676px] 3xl:w-[868px] absolute -z-1 top-[30px] sm:top-[40px] xl:top-[80px] 2xl:top-[60px] left-[6%] xl:left-[calc((100%-var(--container-xl))/2)] 2xl:left-[calc((100%-var(--container-2xl))/2)] 3xl:left-[calc((100%-var(--container-3xl))/2)] ml-4"
       />
       <div className="container">
@@ -274,7 +274,7 @@ export default function Footer({ data = local_data }) {
               <Image
                 src="/icons/icon-intersmart.svg"
                 alt="icon-intersmart"
-                width={96}
+                width={100}
                 height={15}
                 className="w-[70px] xl:w-[90px] 3xl:w-[100px] inline ml-1"
               />

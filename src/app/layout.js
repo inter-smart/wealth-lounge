@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
+import FloatingMenu from "@/components/layout/floating-menu";
 
 const robotoFlex = Roboto_Flex({
   subsets: ["latin"],
@@ -69,6 +70,7 @@ export default function RootLayout({ children }) {
         <Header />
         <main>{children}</main>
         <Footer />
+        {/* <FloatingMenu /> */}
       </body>
     </html>
   );

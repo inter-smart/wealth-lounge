@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Form,
@@ -23,12 +23,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Check } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
+import { Heading } from "../utils/heading";
+import parse from "html-react-parser";
+import { Text } from "../utils/text";
 
 // ✅ Complete validation schema for all steps
 const formSchema = z.object({
@@ -42,90 +43,110 @@ const formSchema = z.object({
     .string()
     .min(10, "Phone number is required")
     .max(20, "Phone number is too long"),
-  dateOfBirth: z.string().min(1, "Date of birth is required"),
-
-  // Step 2: Address Information
-  address: z.string().min(5, "Address is required"),
-  city: z.string().min(2, "City is required"),
-  state: z.string().min(2, "State is required"),
-  zipCode: z.string().min(5, "Valid zip code is required"),
-  country: z.string().min(2, "Country is required"),
-
-  // Step 3: Professional Information
+  age: z
+    .string()
+    .min(1, "Age is required")
+    .refine(
+      (val) => !isNaN(Number(val)) && Number(val) > 0 && Number(val) < 120,
+      {
+        message: "Please enter a valid age",
+      }
+    ),
   occupation: z.string().min(2, "Occupation is required"),
-  company: z.string().min(2, "Company name is required"),
-  experience: z.string().min(1, "Experience level is required"),
-  salary: z.string().min(1, "Salary range is required"),
 
-  // Step 4: Preferences & Requirements
-  serviceType: z.string().min(1, "Service type is required"),
-  preferences: z.array(z.string()).min(1, "Select at least one preference"),
-  additionalDetails: z.string().optional(),
+  // Step 2: Risk Assessment
+  riskComfort: z.string().min(1, "Please select your risk comfort level"),
 
-  // Step 5: Terms & Review
-  terms: z.boolean().refine((val) => val === true, "You must accept the terms"),
-  newsletter: z.boolean().optional(),
+  // Step 3: Investment Experience
+  investedBefore: z
+    .string()
+    .min(1, "Please specify if you have invested before"),
+  investmentExperience: z.string().optional(),
+  investmentProducts: z.string().min(1, "Please select investment products"),
+
+  // Step 4: Investment Products Interest
+  productInterest: z
+    .string()
+    .min(1, "Please select investment products of interest"),
+
+  // Step 5: Investment Timeline
+  readyToInvest: z
+    .string()
+    .min(1, "Please specify when you'll be ready to invest"),
+  maximumPeriod: z.string().min(1, "Please select maximum lock-up period"),
+
+  // Step 6: Contact & Additional Info
+  annualIncome: z.string().min(1, "Please select your annual income range"),
+  communication: z
+    .string()
+    .min(1, "Please select preferred communication method"),
+  mostConvenient: z.string().min(2, "Please specify convenient time"),
+  additionalComments: z.string().optional(),
 });
 
 // ✅ Individual step schemas for validation
-// const stepSchemas = {
-//   1: formSchema.pick({
-//     fullName: true,
-//     email: true,
-//     phone: true,
-//     dateOfBirth: true,
-//   }),
-//   2: formSchema.pick({
-//     address: true,
-//     city: true,
-//     state: true,
-//     zipCode: true,
-//     country: true,
-//   }),
-//   3: formSchema.pick({
-//     occupation: true,
-//     company: true,
-//     experience: true,
-//     salary: true,
-//   }),
-//   4: formSchema.pick({
-//     serviceType: true,
-//     preferences: true,
-//     additionalDetails: true,
-//   }),
-//   5: formSchema.pick({
-//     terms: true,
-//     newsletter: true,
-//   }),
-// };
+const stepSchemas = {
+  1: formSchema.pick({
+    fullName: true,
+    email: true,
+    phone: true,
+    age: true,
+    occupation: true,
+  }),
+  2: formSchema.pick({
+    riskComfort: true,
+  }),
+  3: formSchema.pick({
+    investedBefore: true,
+    investmentExperience: true,
+    investmentProducts: true,
+  }),
+  4: formSchema.pick({
+    productInterest: true,
+  }),
+  5: formSchema.pick({
+    readyToInvest: true,
+    maximumPeriod: true,
+  }),
+  6: formSchema.pick({
+    annualIncome: true,
+    communication: true,
+    mostConvenient: true,
+    additionalComments: true,
+  }),
+};
 
-// ✅ Shared styles (keeping your existing style)
+// ✅ Shared styles
 const labelStyle = `
   text-[10px] sm:text-[10px] xl:text-[12px] 2xl:text-[12px] 3xl:text-[16px] leading-none font-medium text-black mb-[5px] xl:mb-[10px] 2xl:mb-[15px]
 `
   .replace(/\s+/g, " ")
   .trim();
+
+const radioLabelStyle = `
+  text-[10px] sm:text-[10px] xl:text-[12px] 2xl:text-[12px] 3xl:text-[16px] leading-none font-medium text-black
+`
+  .replace(/\s+/g, " ")
+  .trim();
+
 const inputStyle = `
-  text-[10px] sm:text-[10px] xl:text-[12px] 2xl:text-[12px] 3xl:text-[16px] leading-none font-medium text-black placeholder:text-[#1c1c1c] w-full !h-[30px] 2xl:!h-[35px] 3xl:!h-[40px] bg-none border-transparent border-b-[#1c1c1c] px-0 
-  focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:border-transparent focus-visible:border-b-red-500
+  text-[10px] sm:text-[10px] xl:text-[12px] 2xl:text-[12px] 3xl:text-[16px] leading-none font-medium text-black data-[placeholder]:text-[#1c1c1c]/80 placeholder:text-[#1c1c1c]/80 w-full h-[30px] 2xl:h-[35px] 3xl:h-[40px] bg-none border-transparent border-b-[#1c1c1c] shadow-none px-0 
+  focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:border-transparent focus-visible:border-b-primary
   selection:bg-primary-800 appearance-none
 `
   .replace(/\s+/g, " ")
   .trim();
 
 const textareaStyle = `
-  ${inputStyle} min-h-auto resize-none
+  ${inputStyle}
 `
   .replace(/\s+/g, " ")
   .trim();
 
-const glowWrapperClass =
-  "w-full p-[1px] overflow-hidden relative z-0 after:content-[''] after:absolute after:-z-1 after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:scale-150 after:w-[200px] after:h-[200px] after:bg-white/60 after:rounded-full after:blur-[40px]";
-
 export default function MultiStepApplicationForm() {
-  const [currentStep, setCurrentStep] = useState(5);
+  const [currentStep, setCurrentStep] = useState(1);
   const [completedSteps, setCompletedSteps] = useState(new Set());
-  const totalSteps = 7;
+  const totalSteps = 6;
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -133,21 +154,19 @@ export default function MultiStepApplicationForm() {
       fullName: "",
       email: "",
       phone: "",
-      dateOfBirth: "",
-      address: "",
-      city: "",
-      state: "",
-      zipCode: "",
-      country: "",
+      age: "",
       occupation: "",
-      company: "",
-      experience: "",
-      salary: "",
-      serviceType: "",
-      preferences: [],
-      additionalDetails: "",
-      terms: false,
-      newsletter: false,
+      riskComfort: "",
+      investedBefore: "",
+      investmentExperience: "",
+      investmentProducts: "",
+      productInterest: "",
+      readyToInvest: "",
+      maximumPeriod: "",
+      annualIncome: "",
+      communication: "",
+      mostConvenient: "",
+      additionalComments: "",
     },
     mode: "onChange",
   });
@@ -155,10 +174,20 @@ export default function MultiStepApplicationForm() {
   // ✅ Step titles
   const stepTitles = {
     1: "Personal Information",
-    2: "Address Details",
-    3: "Professional Information",
-    4: "Preferences & Requirements",
-    5: "Review & Submit",
+    2: "Risk Tolerance",
+    3: "Investment Experience",
+    4: "Investment Preferences",
+    5: "Time Horizon",
+    6: "Contact & Review",
+  };
+  // ✅ Step description
+  const stepDescription = {
+    1: "",
+    2: "",
+    3: "",
+    4: "<p>The following list covers the range of investment products that we offer.</p>",
+    5: "",
+    6: "",
   };
 
   // ✅ Validate current step
@@ -183,7 +212,21 @@ export default function MultiStepApplicationForm() {
     }
   };
 
-  // ✅ Handle next step
+  // Handle previous step
+  const handlePrevious = () => {
+    if (currentStep > 1) {
+      const previousStep = currentStep - 1;
+      setCurrentStep(previousStep); // Optionally remove the step you're leaving from the completed set
+
+      setCompletedSteps((prev) => {
+        const newCompleted = new Set(prev);
+        newCompleted.delete(currentStep); // Remove the current step from the set
+        return newCompleted;
+      });
+    }
+  };
+
+  // Handle next step (the logic is sound here, just adding context)
   const handleNext = async () => {
     const isValid = await validateStep(currentStep);
     if (isValid) {
@@ -194,12 +237,13 @@ export default function MultiStepApplicationForm() {
     }
   };
 
-  // ✅ Handle previous step
-  const handlePrevious = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
+  // Recalculate progress based on the updated state
+  // The progress logic needs to be simplified to always check against the current state
+  const progress = Math.min(
+    100,
+    ((completedSteps.size + (form.formState.isValid ? 1 : 0)) / totalSteps) *
+      100
+  );
 
   // ✅ Handle final form submission
   const onSubmit = async (values) => {
@@ -207,9 +251,6 @@ export default function MultiStepApplicationForm() {
     // Handle your form submission logic here
     alert("Application submitted successfully!");
   };
-
-  // ✅ Calculate progress
-  const progress = (completedSteps.size / totalSteps) * 100;
 
   // ✅ Animation variants
   const slideVariants = {
@@ -229,9 +270,9 @@ export default function MultiStepApplicationForm() {
     }),
   };
 
-  // ✅ Step 1
+  // ✅ Step 1: Personal Information
   const renderStep1 = () => (
-    <div className="flex flex-wrap items-start -mx-4 [&>*]:p-4">
+    <div className="flex flex-wrap -mx-4 [&>*]:p-4">
       <FormField
         control={form.control}
         name="fullName"
@@ -329,12 +370,12 @@ export default function MultiStepApplicationForm() {
     </div>
   );
 
-  // ✅ Step 2
+  // ✅ Step 2: Risk Assessment
   const renderStep2 = () => (
-    <div className="flex flex-wrap items-start -mx-4 [&>*]:p-4">
+    <div className="flex flex-wrap -mx-4 [&>*]:p-4">
       <FormField
         control={form.control}
-        name="type"
+        name="riskComfort"
         render={({ field }) => (
           <FormItem className="w-full">
             <FormLabel className={labelStyle}>
@@ -344,50 +385,26 @@ export default function MultiStepApplicationForm() {
               <RadioGroup
                 onValueChange={field.onChange}
                 defaultValue={field.value}
-                className="flex flex-wrap gap-10"
+                className="flex flex-wrap gap-x-5 gap-y-5"
               >
-                <FormItem className="flex items-center gap-2">
-                  <FormControl>
-                    <RadioGroupItem value="veryConservative" />
-                  </FormControl>
-                  <FormLabel className="font-normal">
-                    Very conservative
-                  </FormLabel>
-                </FormItem>
-                <FormItem className="flex items-center gap-2">
-                  <FormControl>
-                    <RadioGroupItem value="onservative" />
-                  </FormControl>
-                  <FormLabel className="font-normal">Onservative</FormLabel>
-                </FormItem>
-                <FormItem className="flex items-center gap-2">
-                  <FormControl>
-                    <RadioGroupItem value="moderately" />
-                  </FormControl>
-                  <FormLabel className="font-normal">Moderately</FormLabel>
-                </FormItem>
-                <FormItem className="flex items-center gap-2">
-                  <FormControl>
-                    <RadioGroupItem value="conservativeBalanced" />
-                  </FormControl>
-                  <FormLabel className="font-normal">
-                    Conservative Balanced
-                  </FormLabel>
-                </FormItem>
-                <FormItem className="flex items-center gap-2">
-                  <FormControl>
-                    <RadioGroupItem value="moderatelyAggressive" />
-                  </FormControl>
-                  <FormLabel className="font-normal">
-                    Moderately Aggressive
-                  </FormLabel>
-                </FormItem>
-                <FormItem className="flex items-center gap-2">
-                  <FormControl>
-                    <RadioGroupItem value="aggressive" />
-                  </FormControl>
-                  <FormLabel className="font-normal">Aggressive</FormLabel>
-                </FormItem>
+                {[
+                  "Very conservative",
+                  "Conservative",
+                  "Moderately Conservative",
+                  "Balanced",
+                  "Moderately Aggressive",
+                  "Aggressive",
+                ].map((item, index) => (
+                  <FormItem
+                    key={"riskComfort" + index}
+                    className="flex items-center gap-2"
+                  >
+                    <FormControl>
+                      <RadioGroupItem value={item.toLowerCase().trim()} />
+                    </FormControl>
+                    <FormLabel className={radioLabelStyle}>{item}</FormLabel>
+                  </FormItem>
+                ))}
               </RadioGroup>
             </FormControl>
             <FormMessage />
@@ -397,9 +414,9 @@ export default function MultiStepApplicationForm() {
     </div>
   );
 
-  // ✅ Step 3
+  // ✅ Step 3: Investment Experience
   const renderStep3 = () => (
-    <div className="flex flex-wrap items-start -mx-4 [&>*]:p-4">
+    <div className="flex flex-wrap -mx-4 [&>*]:p-4">
       <FormField
         control={form.control}
         name="investedBefore"
@@ -412,20 +429,19 @@ export default function MultiStepApplicationForm() {
               <RadioGroup
                 onValueChange={field.onChange}
                 defaultValue={field.value}
-                className="flex flex-wrap gap-10"
+                className="flex flex-wrap gap-x-5 gap-y-5"
               >
-                <FormItem className="flex items-center gap-2">
-                  <FormControl>
-                    <RadioGroupItem value="investedYes" />
-                  </FormControl>
-                  <FormLabel className="font-normal">Yes</FormLabel>
-                </FormItem>
-                <FormItem className="flex items-center gap-2">
-                  <FormControl>
-                    <RadioGroupItem value="investedNo" />
-                  </FormControl>
-                  <FormLabel className="font-normal">No</FormLabel>
-                </FormItem>
+                {["Yes", "No"].map((item, index) => (
+                  <FormItem
+                    key={"investedBefore" + index}
+                    className="flex items-center gap-2"
+                  >
+                    <FormControl>
+                      <RadioGroupItem value={item.toLowerCase().trim()} />
+                    </FormControl>
+                    <FormLabel className={radioLabelStyle}>{item}</FormLabel>
+                  </FormItem>
+                ))}
               </RadioGroup>
             </FormControl>
             <FormMessage />
@@ -439,32 +455,25 @@ export default function MultiStepApplicationForm() {
         render={({ field }) => (
           <FormItem className="w-full">
             <FormLabel className={labelStyle}>
-              If yes, how would you describe your investment experience?*
+              If yes, how would you describe your investment experience?
             </FormLabel>
             <FormControl>
               <RadioGroup
                 onValueChange={field.onChange}
                 defaultValue={field.value}
-                className="flex flex-wrap gap-10"
+                className="flex flex-wrap gap-x-5 gap-y-5"
               >
-                <FormItem className="flex items-center gap-2">
-                  <FormControl>
-                    <RadioGroupItem value="beginner" />
-                  </FormControl>
-                  <FormLabel className="font-normal">Beginner</FormLabel>
-                </FormItem>
-                <FormItem className="flex items-center gap-2">
-                  <FormControl>
-                    <RadioGroupItem value="intermediate" />
-                  </FormControl>
-                  <FormLabel className="font-normal">Intermediate</FormLabel>
-                </FormItem>
-                <FormItem className="flex items-center gap-2">
-                  <FormControl>
-                    <RadioGroupItem value="advanced" />
-                  </FormControl>
-                  <FormLabel className="font-normal">Advanced</FormLabel>
-                </FormItem>
+                {["Beginner", "Intermediate", "Advanced"].map((item, index) => (
+                  <FormItem
+                    key={"investmentExperience" + index}
+                    className="flex items-center gap-2"
+                  >
+                    <FormControl>
+                      <RadioGroupItem value={item.toLowerCase().trim()} />
+                    </FormControl>
+                    <FormLabel className={radioLabelStyle}>{item}</FormLabel>
+                  </FormItem>
+                ))}
               </RadioGroup>
             </FormControl>
             <FormMessage />
@@ -477,17 +486,26 @@ export default function MultiStepApplicationForm() {
         name="investmentProducts"
         render={({ field }) => (
           <FormItem className="w-full mt-[10px] xl:mt-[15px] 2xl:mt-[20px]">
-            <FormLabel className={"sr-only"}>What date will</FormLabel>
+            <FormLabel className="sr-only">
+              Investment products interest
+            </FormLabel>
             <Select onValueChange={field.onChange} defaultValue={field.value}>
               <FormControl>
-                <SelectTrigger className={inputStyle}>
-                  <SelectValue placeholder="Which of the following investment products would you like to know more about?*" />
+                <SelectTrigger size="none" className={inputStyle}>
+                  <SelectValue placeholder="Which investment products interest you most?*" />
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                <SelectItem value="1">Investment products 1</SelectItem>
-                <SelectItem value="2">Investment products 2</SelectItem>
-                <SelectItem value="3">Investment products 3</SelectItem>
+                <SelectItem value="stocks">Stocks & Equities</SelectItem>
+                <SelectItem value="bonds">Bonds & Fixed Income</SelectItem>
+                <SelectItem value="reits">
+                  Real Estate Investment Trusts
+                </SelectItem>
+                <SelectItem value="mutual-funds">Mutual Funds</SelectItem>
+                <SelectItem value="etfs">Exchange Traded Funds</SelectItem>
+                <SelectItem value="alternatives">
+                  Alternative Investments
+                </SelectItem>
               </SelectContent>
             </Select>
             <FormMessage />
@@ -497,12 +515,12 @@ export default function MultiStepApplicationForm() {
     </div>
   );
 
-  // ✅ Step 4
+  // ✅ Step 4: Investment Products Interest
   const renderStep4 = () => (
-    <div className="flex flex-wrap items-start -mx-4 [&>*]:p-4">
+    <div className="flex flex-wrap -mx-4 [&>*]:p-4">
       <FormField
         control={form.control}
-        name="investmentProducts"
+        name="productInterest"
         render={({ field }) => (
           <FormItem className="w-full">
             <FormLabel className={labelStyle}>
@@ -513,7 +531,7 @@ export default function MultiStepApplicationForm() {
               <RadioGroup
                 onValueChange={field.onChange}
                 defaultValue={field.value}
-                className="flex flex-wrap gap-x-10 gap-y-5"
+                className="flex flex-wrap gap-x-5 gap-y-5"
               >
                 {[
                   "Physical Real Estate",
@@ -529,13 +547,13 @@ export default function MultiStepApplicationForm() {
                   "Other",
                 ].map((item, index) => (
                   <FormItem
-                    key={"investment" + index}
+                    key={"productInterest" + index}
                     className="flex items-center gap-2"
                   >
                     <FormControl>
                       <RadioGroupItem value={item.toLowerCase().trim()} />
                     </FormControl>
-                    <FormLabel className="font-normal">{item}</FormLabel>
+                    <FormLabel className={radioLabelStyle}>{item}</FormLabel>
                   </FormItem>
                 ))}
               </RadioGroup>
@@ -547,27 +565,27 @@ export default function MultiStepApplicationForm() {
     </div>
   );
 
-  // ✅ Step 5
+  // ✅ Step 5: Investment Timeline
   const renderStep5 = () => (
-    <div className="flex flex-wrap items-start -mx-4 [&>*]:p-4">
+    <div className="flex flex-wrap -mx-4 [&>*]:p-4">
       <FormField
         control={form.control}
-        name="investmentProducts"
+        name="readyToInvest"
         render={({ field }) => (
           <FormItem className="w-full mt-[10px] xl:mt-[15px] 2xl:mt-[20px]">
-            <FormLabel className={"sr-only"}>
-              You be ready to invest?*
-            </FormLabel>
+            <FormLabel className="sr-only">Ready to invest timeline</FormLabel>
             <Select onValueChange={field.onChange} defaultValue={field.value}>
               <FormControl>
-                <SelectTrigger className={inputStyle}>
-                  <SelectValue placeholder="You be ready to invest?*" />
+                <SelectTrigger size="none" className={inputStyle}>
+                  <SelectValue placeholder="What date will you be ready to invest?*" />
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                <SelectItem value="1">Ready to invest 1</SelectItem>
-                <SelectItem value="2">Ready to invest 2</SelectItem>
-                <SelectItem value="3">Ready to invest 3</SelectItem>
+                <SelectItem value="immediately">Immediately</SelectItem>
+                <SelectItem value="1-3months">Within 1-3 months</SelectItem>
+                <SelectItem value="3-6months">Within 3-6 months</SelectItem>
+                <SelectItem value="6-12months">Within 6-12 months</SelectItem>
+                <SelectItem value="1year+">More than 1 year</SelectItem>
               </SelectContent>
             </Select>
             <FormMessage />
@@ -577,7 +595,7 @@ export default function MultiStepApplicationForm() {
 
       <FormField
         control={form.control}
-        name="investmentProducts"
+        name="maximumPeriod"
         render={({ field }) => (
           <FormItem className="w-full">
             <FormLabel className={labelStyle}>
@@ -588,7 +606,7 @@ export default function MultiStepApplicationForm() {
               <RadioGroup
                 onValueChange={field.onChange}
                 defaultValue={field.value}
-                className="flex flex-wrap gap-x-10 gap-y-5"
+                className="flex flex-wrap gap-x-5 gap-y-5"
               >
                 {[
                   "Short-term (1-3 years)",
@@ -596,13 +614,13 @@ export default function MultiStepApplicationForm() {
                   "Long-term (5+ years)",
                 ].map((item, index) => (
                   <FormItem
-                    key={"investment" + index}
+                    key={"maximumPeriod" + index}
                     className="flex items-center gap-2"
                   >
                     <FormControl>
                       <RadioGroupItem value={item.toLowerCase().trim()} />
                     </FormControl>
-                    <FormLabel className="font-normal">{item}</FormLabel>
+                    <FormLabel className={radioLabelStyle}>{item}</FormLabel>
                   </FormItem>
                 ))}
               </RadioGroup>
@@ -613,147 +631,203 @@ export default function MultiStepApplicationForm() {
       />
     </div>
   );
-  // ✅ Step 6
+
+  // ✅ Step 6: Contact & Review
   const renderStep6 = () => (
-    <div className="flex flex-wrap items-start -mx-4 [&>*]:p-4">
-      <FormField
-        control={form.control}
-        name="investmentProducts"
-        render={({ field }) => (
-          <FormItem className="w-full mt-[10px] xl:mt-[15px] 2xl:mt-[20px]">
-            <FormLabel className={"sr-only"}>
-              You be ready to invest?*
-            </FormLabel>
-            <Select onValueChange={field.onChange} defaultValue={field.value}>
+    <>
+      <div className="flex flex-wrap -mx-4 [&>*]:p-4">
+        <FormField
+          control={form.control}
+          name="annualIncome"
+          render={({ field }) => (
+            <FormItem className="w-full mt-[10px] xl:mt-[15px] 2xl:mt-[20px]">
+              <FormLabel className="sr-only">Annual income</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger size="none" className={inputStyle}>
+                    <SelectValue placeholder="What is your annual income?*" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="under-50k">Under $50,000</SelectItem>
+                  <SelectItem value="50k-100k">$50,000 - $100,000</SelectItem>
+                  <SelectItem value="100k-200k">$100,000 - $200,000</SelectItem>
+                  <SelectItem value="200k-500k">$200,000 - $500,000</SelectItem>
+                  <SelectItem value="500k+">$500,000+</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="communication"
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormLabel className={labelStyle}>
+                Preferred Method of Communication?*
+              </FormLabel>
               <FormControl>
-                <SelectTrigger className={inputStyle}>
-                  <SelectValue placeholder="You be ready to invest?*" />
-                </SelectTrigger>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  className="flex flex-wrap gap-x-5 gap-y-5"
+                >
+                  {["Email", "Phone"].map((item, index) => (
+                    <FormItem
+                      key={"communication" + index}
+                      className="flex items-center gap-2"
+                    >
+                      <FormControl>
+                        <RadioGroupItem value={item.toLowerCase().trim()} />
+                      </FormControl>
+                      <FormLabel className={radioLabelStyle}>{item}</FormLabel>
+                    </FormItem>
+                  ))}
+                </RadioGroup>
               </FormControl>
-              <SelectContent>
-                <SelectItem value="1">Ready to invest 1</SelectItem>
-                <SelectItem value="2">Ready to invest 2</SelectItem>
-                <SelectItem value="3">Ready to invest 3</SelectItem>
-              </SelectContent>
-            </Select>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <FormField
-        control={form.control}
-        name="investmentProducts"
-        render={({ field }) => (
-          <FormItem className="w-full">
-            <FormLabel className={labelStyle}>
-              What is the maximum time period you are prepared to lock up your
-              capital for?*
-            </FormLabel>
-            <FormControl>
-              <RadioGroup
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-                className="flex flex-wrap gap-x-10 gap-y-5"
-              >
-                {[
-                  "Short-term (1-3 years)",
-                  "Medium-term (3-5 years)",
-                  "Long-term (5+ years)",
-                ].map((item, index) => (
-                  <FormItem
-                    key={"investment" + index}
-                    className="flex items-center gap-2"
-                  >
-                    <FormControl>
-                      <RadioGroupItem value={item.toLowerCase().trim()} />
-                    </FormControl>
-                    <FormLabel className="font-normal">{item}</FormLabel>
-                  </FormItem>
-                ))}
-              </RadioGroup>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-    </div>
+        <FormField
+          control={form.control}
+          name="mostConvenient"
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormLabel className="sr-only">Convenient time</FormLabel>
+              <FormControl>
+                <Input
+                  type="text"
+                  placeholder="Is there a specific time or day that is most convenient for us to reach out to you?*"
+                  className={inputStyle}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="additionalComments"
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormLabel className="sr-only">Additional comments</FormLabel>
+              <FormControl>
+                <Textarea
+                  className={textareaStyle}
+                  placeholder="Additional Comments or Questions"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </div>
+
+      {/* Review Section */}
+      <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mt-6">
+        <h3 className="text-black text-lg font-semibold mb-4">
+          Review Your Information
+        </h3>
+        <div className="space-y-3 text-sm">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <span className="text-gray-600">Name:</span>
+              <span className="text-black ml-2 font-medium">
+                {form.watch("fullName") || "Not provided"}
+              </span>
+            </div>
+            <div>
+              <span className="text-gray-600">Email:</span>
+              <span className="text-black ml-2 font-medium">
+                {form.watch("email") || "Not provided"}
+              </span>
+            </div>
+            <div>
+              <span className="text-gray-600">Phone:</span>
+              <span className="text-black ml-2 font-medium">
+                {form.watch("phone") || "Not provided"}
+              </span>
+            </div>
+            <div>
+              <span className="text-gray-600">Age:</span>
+              <span className="text-black ml-2 font-medium">
+                {form.watch("age") || "Not provided"}
+              </span>
+            </div>
+            <div>
+              <span className="text-gray-600">Occupation:</span>
+              <span className="text-black ml-2 font-medium">
+                {form.watch("occupation") || "Not provided"}
+              </span>
+            </div>
+            <div>
+              <span className="text-gray-600">Risk Level:</span>
+              <span className="text-black ml-2 font-medium capitalize">
+                {form.watch("riskComfort")?.replace(/[-_]/g, " ") ||
+                  "Not provided"}
+              </span>
+            </div>
+            <div>
+              <span className="text-gray-600">Investment Experience:</span>
+              <span className="text-black ml-2 font-medium capitalize">
+                {form.watch("investedBefore") || "Not provided"}
+              </span>
+            </div>
+            <div>
+              <span className="text-gray-600">Product Interest:</span>
+              <span className="text-black ml-2 font-medium">
+                {form.watch("productInterest")?.replace(/[-_]/g, " ") ||
+                  "Not provided"}
+              </span>
+            </div>
+            <div>
+              <span className="text-gray-600">Investment Timeline:</span>
+              <span className="text-black ml-2 font-medium">
+                {form.watch("readyToInvest")?.replace(/[-_]/g, " ") ||
+                  "Not provided"}
+              </span>
+            </div>
+            <div>
+              <span className="text-gray-600">Lock-up Period:</span>
+              <span className="text-black ml-2 font-medium">
+                {form.watch("maximumPeriod")?.replace(/[-_]/g, " ") ||
+                  "Not provided"}
+              </span>
+            </div>
+            <div>
+              <span className="text-gray-600">Annual Income:</span>
+              <span className="text-black ml-2 font-medium">
+                {form.watch("annualIncome")?.replace(/[-_]/g, " ") ||
+                  "Not provided"}
+              </span>
+            </div>
+            <div>
+              <span className="text-gray-600">Communication:</span>
+              <span className="text-black ml-2 font-medium capitalize">
+                {form.watch("communication") || "Not provided"}
+              </span>
+            </div>
+            {form.watch("additionalComments") && (
+              <div className="md:col-span-2">
+                <span className="text-gray-600">Additional Comments:</span>
+                <p className="text-black ml-2 font-medium">
+                  {form.watch("additionalComments")}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </>
   );
-
-  // const renderStep5 = () => (
-  //   <div className="space-y-6">
-  //     {/* Review Section */}
-  //     <div className="bg-[#1a1a1a] p-6 rounded-lg border border-gray-800">
-  //       <h3 className="text-white text-lg font-semibold mb-4">
-  //         Review Your Information
-  //       </h3>
-  //       <div className="space-y-3 text-sm">
-  //         <div className="grid grid-cols-2 gap-4">
-  //           <div>
-  //             <span className="text-gray-400">Name:</span>
-  //             <span className="text-white ml-2">{form.watch("fullName")}</span>
-  //           </div>
-  //           <div>
-  //             <span className="text-gray-400">Email:</span>
-  //             <span className="text-white ml-2">{form.watch("email")}</span>
-  //           </div>
-  //           <div>
-  //             <span className="text-gray-400">Phone:</span>
-  //             <span className="text-white ml-2">{form.watch("phone")}</span>
-  //           </div>
-  //           <div>
-  //             <span className="text-gray-400">Service:</span>
-  //             <span className="text-white ml-2 capitalize">
-  //               {form.watch("serviceType")}
-  //             </span>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-
-  //     {/* Terms and Conditions */}
-  //     <FormField
-  //       control={form.control}
-  //       name="terms"
-  //       render={({ field }) => (
-  //         <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-  //           <FormControl>
-  //             <Checkbox
-  //               checked={field.value}
-  //               onCheckedChange={field.onChange}
-  //             />
-  //           </FormControl>
-  //           <div className="space-y-1 leading-none">
-  //             <FormLabel className="text-white cursor-pointer">
-  //               I accept the terms and conditions*
-  //             </FormLabel>
-  //           </div>
-  //           <FormMessage />
-  //         </FormItem>
-  //       )}
-  //     />
-
-  //     <FormField
-  //       control={form.control}
-  //       name="newsletter"
-  //       render={({ field }) => (
-  //         <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-  //           <FormControl>
-  //             <Checkbox
-  //               checked={field.value}
-  //               onCheckedChange={field.onChange}
-  //             />
-  //           </FormControl>
-  //           <div className="space-y-1 leading-none">
-  //             <FormLabel className="text-white cursor-pointer">
-  //               Subscribe to newsletter for updates
-  //             </FormLabel>
-  //           </div>
-  //         </FormItem>
-  //       )}
-  //     />
-  //   </div>
-  // );
 
   // ✅ Render current step content
   const renderStepContent = () => {
@@ -768,61 +842,47 @@ export default function MultiStepApplicationForm() {
         return renderStep4();
       case 5:
         return renderStep5();
+      case 6:
+        return renderStep6();
       default:
         return renderStep1();
     }
   };
 
   return (
-    <div className="w-full h-auto p-[50px_60px] bg-[#fffbf4]">
-      {/* Progress Header */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold text-black">Application Form</h2>
-          <span className="text-sm text-gray-400">
-            Step {currentStep} of {totalSteps}
-          </span>
-        </div>
-
-        <Progress value={progress} className="w-full h-2 mb-4" />
-
-        {/* <div className="flex items-center justify-between">
-          {Array.from({ length: totalSteps }, (_, i) => i + 1).map((step) => (
-            <div key={step} className="flex items-center">
-              <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                  completedSteps.has(step)
-                    ? "bg-green-600 text-white"
-                    : step === currentStep
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-600 text-gray-300"
-                }`}
-              >
-                {completedSteps.has(step) ? (
-                  <Check className="w-4 h-4" />
-                ) : (
-                  step
-                )}
-              </div>
-              {step < totalSteps && (
-                <div
-                  className={`h-0.5 w-12 md:w-24 ${
-                    completedSteps.has(step) ? "bg-green-600" : "bg-gray-600"
-                  }`}
-                />
-              )}
-            </div>
-          ))}
-        </div> */}
-
-        <h3 className="text-xl font-semibold text-black mt-4">
+    <div className="w-full h-auto p-[20px_15px] sm:p-[30px_30px] xl:p-[40px_35px] 2xl:p-[60px_60px] bg-[#fffbf4] overflow-hidden relative z-0">
+      <Progress
+        value={progress}
+        className={`w-full h-1 rounded-0 absolute z-1 top-0 left-0 right-0 ${
+          currentStep === 1 ? "opacity-50" : "opacity-100"
+        }`}
+      />
+      <div className="w-full mb-[15px] sm:mb-[20px] xl:mb-[30px] 2xl:mb-[40px]">
+        <Heading
+          as="h6"
+          size="none"
+          className="text-[12px] sm:text-[11px] lg:text-[11px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[16px] leading-tight font-normal font-brownede text-[#1c1c1c] mb-1"
+        >
+          Step {currentStep} of {totalSteps}
+        </Heading>
+        <Heading
+          as="h2"
+          size="none"
+          className="text-[14px] sm:text-[16px] lg:text-[20px] xl:text-[22px] 2xl:text-[26px] 3xl:text-[30px] leading-none font-extralight font-brownede text-primary mb-1 xl:mb-2"
+        >
           {stepTitles[currentStep]}
-        </h3>
+        </Heading>
+        <Text
+          as="div"
+          size="none"
+          className="text-[12px] sm:text-[11px] lg:text-[11px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[16px] leading-normal font-medium text-[#1c1c1c] mb-1"
+        >
+          {parse(stepDescription[currentStep])}
+        </Text>
       </div>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          {/* Step Content with Animation */}
           <AnimatePresence mode="wait" custom={currentStep}>
             <motion.div
               key={currentStep}
@@ -841,35 +901,27 @@ export default function MultiStepApplicationForm() {
           </AnimatePresence>
 
           {/* Navigation Buttons */}
-          <div className="flex justify-between items-center pt-6 ">
+          <div className="flex justify-between items-center mt-6">
             <Button
               type="button"
-              variant="outline"
+              variant="link"
               onClick={handlePrevious}
               disabled={currentStep === 1}
-              className="text-black flex items-center space-x-2"
+              className={`text-black !no-underline ${
+                currentStep > 1 ? "visible" : "invisible pointer-events-none"
+              }`}
             >
               <ChevronLeft className="w-4 h-4" />
-              <span>Previous</span>
+              <span>Back</span>
             </Button>
 
             {currentStep < totalSteps ? (
-              // <Button
-              //   type="button"
-              //   onClick={handleNext}
-              //   className="flex items-center space-x-2"
-              // >
-              //   <span>Next</span>
-              //   <ChevronRight className="w-4 h-4" />
-              // </Button>
               <Button
                 type="button"
                 onClick={handleNext}
                 variant="outline"
-                className={
-                  "text-[#1c1c1c] border-[#1c1c1c] max-w-[120px] xl:max-w-[120px] 2xl:max-w-[140px]"
-                }
-                animate={false}
+                className="text-[#1c1c1c] border-[#1c1c1c] min-w-[100px] sm:min-w-[120px] xl:min-w-[120px] 2xl:min-w-[140px]"
+                animate={true}
               >
                 Next
                 <Image
@@ -883,12 +935,22 @@ export default function MultiStepApplicationForm() {
               </Button>
             ) : (
               <Button
-                type="submit"
-                className="flex items-center space-x-2 bg-green-600 hover:bg-green-700"
+                type="button"
+                onClick={async () => {
+                  const isValid = await validateStep(currentStep);
+                  if (isValid) {
+                    const allFormData = form.getValues();
+                    console.log("Final form submission:", allFormData);
+                    alert("Application submitted successfully!");
+                  }
+                }}
+                variant="outline"
+                className="text-[#1c1c1c] border-[#1c1c1c] min-w-[100px] sm:min-w-[120px] xl:min-w-[120px] 2xl:min-w-[140px]"
+                animate={true}
               >
-                <span>Submit Application</span>
+                Submit
                 <Image
-                  src="/icons/brand-icon.svg"
+                  src="/icons/brand-icon-black.svg"
                   alt="brand icon"
                   width={20}
                   height={20}
