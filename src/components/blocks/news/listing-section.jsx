@@ -196,7 +196,7 @@ export default function ListingSection({ data = local_data }) {
   return (
     <section className="w-full h-auto block py-[30px] sm:py-[60px] xl:py-[90px] 2xl:py-[110px] bg-[#FFFBF4] relative z-0">
       <div className="container">
-        <div className="flex flex-wrap">
+        <div>
           <Heading
             as="h2"
             size="heading2"
@@ -214,15 +214,15 @@ export default function ListingSection({ data = local_data }) {
         </div>
         <div className="w-full h-auto flex justify-end">
           <Select onValueChange={(value) => setFilter(value)}>
-            <SelectTrigger className="w-[152px] !h-[40px] px-[20px] xl:px-[28px] border-1 border-[#000] focus:outline-none [&_.lucide-chevron-down]:hidden relative z-0">
+            <SelectTrigger className="w-[152px] !h-[40px] px-[20px] xl:px-[28px] border-1 border-[#000] focus:ring-0 focus:shadow-none focus-visible:ring-0 focus-visible:shadow-none [&_.lucide-chevron-down]:hidden relative z-0">
               <SelectValue placeholder="View All" />
-              <div className="w-[15px] h-[15px] absolute -z-1 right-[20px] xl:right-[28px]">
+              <div className="w-[15px] h-[14px] absolute -z-1 right-[20px] xl:right-[28px]">
                 <Image
                   src="/images/news-dwn-arrw.svg"
                   alt="arrow"
                   width={15}
                   height={14}
-                  className="w-[100%] h-[100%] object-contain"
+                  className="w-[15px] h-[14px] object-contain"
                 />
               </div>
             </SelectTrigger>
