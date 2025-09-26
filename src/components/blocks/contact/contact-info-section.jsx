@@ -59,7 +59,7 @@ export default function ContactInfoSection({ data = local_data }) {
         >
           {data?.title}
         </Heading>
-        <div className="flex flex-wrap sm:items-center -mx-[15px] md:-mx-[40px] xl:-mx-[100px] 2xl:-mx-[120px] [&>*]:p-[15px] md:[&>*]:p-[20px_40px] xl:[&>*]:p-[40px_100px] 2xl:[&>*]:p-[60px_120px]">
+        <div className="flex flex-wrap justify-center sm:items-center -mx-[15px] md:-mx-[40px] xl:-mx-[100px] 2xl:-mx-[120px] [&>*]:p-[15px] md:[&>*]:p-[20px_40px] xl:[&>*]:p-[40px_100px] 2xl:[&>*]:p-[60px_120px]">
           {data?.item_list?.map((item, index) => {
             const isLastItem = index === data?.item_list?.length - 1;
             return (
@@ -122,7 +122,7 @@ export default function ContactInfoSection({ data = local_data }) {
                   </Text>
                 </div>
                 {!isLastItem && (
-                  <div className="w-[1px] h-1/3 bg-linear-to-b from-[#f8f8f8] via-[#998262] to-[#f8f8f8] absolute z-0 top-1/2 right-0 -translate-y-1/2" />
+                  <div className="w-[1px] h-1/3 bg-linear-to-b from-[#f8f8f8] via-[#998262] to-[#f8f8f8] absolute z-0 top-1/2 right-0 -translate-y-1/2 max-md:hidden" />
                 )}
               </div>
             );

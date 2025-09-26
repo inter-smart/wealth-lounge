@@ -18,6 +18,7 @@ const local_data = {
   description:
     "<p>We have created this form to help us ﬁnd the right investment opportunities for you. The questions below will give us a good insight into what type of investor you are, or would like to become, and which products would be the best ﬁt for you and your investment goals. Want to find out what the smartest investment options are for yourself? Complete this short questionnaire let us help you explore which type of investments are best suited to your needs:</p>",
   button: null,
+  location_url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.2328542636224!2d55.281101199999995!3d25.262751200000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f454aa34dacbf%3A0xc807568e929e8477!2sDUQE!5e0!3m2!1sen!2sin!4v1758892501657!5m2!1sen!2sin",
   item_list: [
     {
       media: {
