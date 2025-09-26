@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { Heading } from "@/components/utils/heading";
 import { Text } from "@/components/utils/text";
 import Image from "next/image";
@@ -190,10 +191,24 @@ const local_data = {
 
 export default function ListingSection({ data = local_data }) {
   const [filter, setFilter] = useState("all");
+  const [columns, setColumns] = useState(1);
+
   const filteredItems =
     filter === "all"
       ? data.item_list
       : data.item_list.filter((item) => item.category === filter);
+  useEffect(() => {
+    const updateColumns = () => {
+      if (window.innerWidth >= 1280) setColumns(4); // xl
+      else if (window.innerWidth >= 768) setColumns(3); // md
+      else if (window.innerWidth >= 640) setColumns(2); // sm
+      else setColumns(1);
+    };
+
+    updateColumns();
+    window.addEventListener("resize", updateColumns);
+    return () => window.removeEventListener("resize", updateColumns);
+  }, []);
   return (
     <section className="w-full h-auto block py-[30px] sm:py-[60px] xl:py-[90px] 2xl:py-[110px] bg-[#FFFBF4] relative z-0">
       <Image
@@ -244,26 +259,31 @@ export default function ListingSection({ data = local_data }) {
         <div className="flex flex-wrap mx-[-5px] xl:mx-[-10px] 2xl:mx-[-12px] 3xl:mx-[-15px] [&>*]:p-[30px_5px] xl:[&>*]:p-[50px_10px] 2xl:[&>*]:p-[60px_12px] 3xl:[&>*]:p-[75px_15px] relative z-0">
           <div className="w-full h-full bg-[radial-gradient(circle,transparent_5%,#FFFBF4_100%)] pointer-events-none absolute  z-2 inset-0" />
           {filteredItems.map((item, index) => {
-            const totalItems = filteredItems.length;
-            const columns = 4; // Keep responsive logic if needed
-            const isLastColumn = (index + 1) % columns === 0;
-            const currentRow = Math.floor(index / columns) + 1;
-            const numRows = Math.ceil(totalItems / columns);
-            const isLastRow = currentRow === numRows;
-            return (
-              <div
-                key={"item" + index}
-                className={`w-full sm:w-1/2 md:w-1/3 xl:w-1/4 border-r border-r-[#998262] border-b border-b-[#998262]
-              ${isLastColumn ? "border-r-0" : ""}
-              ${isLastRow ? "border-b-0" : ""}
-              `}
-              >
-                <div className="w-full h-full relative z-3">
-                  <BlogCard data={item} />
-                </div>
-              </div>
-            );
-          })}
+  const totalItems = filteredItems.length;
+  const colIndex = index % columns; // column position (0-based)
+  const rowIndex = Math.floor(index / columns); // row position
+  const totalRows = Math.ceil(totalItems / columns);
+
+  // Border conditions
+  const isLastColumn = colIndex === columns - 1; 
+  const isLastRow = rowIndex === totalRows - 1;
+  const isLastInColumn = index + columns >= totalItems; // item has no one below it
+
+  return (
+    <div
+      key={"item" + index}
+      className={`w-full sm:w-1/2 md:w-1/3 xl:w-1/4 border-r border-b border-[#998262]
+        ${isLastColumn ? "border-r-0" : ""}
+        ${isLastRow || isLastInColumn ? "border-b-0" : ""}
+      `}
+    >
+      <div className="w-full h-full relative z-3">
+        <BlogCard data={item} />
+      </div>
+    </div>
+  );
+})}
+
         </div>
       </div>
     </section>
