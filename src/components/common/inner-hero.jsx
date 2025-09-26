@@ -37,7 +37,9 @@ export default function InnerHero({ data, breadcrumb }) {
             srcSet={data?.background_media?.mobile?.path}
           />
           <Image
-            src={data?.background_media?.desktop?.path}
+            src={
+              data?.background_media?.desktop?.path || "/images/placeholder.jpg"
+            }
             alt={data?.background_media?.desktop?.alt}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 80vw"

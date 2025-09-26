@@ -81,13 +81,13 @@ const local_data = {
     item_list: [
       {
         is_external: true,
-        icon: "icons/icon-ae.svg",
+        icon: "/icons/icon-ae.svg",
         label: "UAE",
         link: "/",
       },
       {
         is_external: false,
-        icon: "icons/icon-london.svg",
+        icon: "/icons/icon-london.svg",
         label: "London",
         link: "/",
       },
@@ -97,22 +97,22 @@ const local_data = {
     title: "Follow Us",
     item_list: [
       {
-        icon: "icons/icon-youtube.svg",
+        icon: "/icons/icon-youtube.svg",
         label: "youtube",
         link: "/",
       },
       {
-        icon: "icons/icon-insta.svg",
+        icon: "/icons/icon-insta.svg",
         label: "insta",
         link: "/",
       },
       {
-        icon: "icons/icon-linkedin.svg",
+        icon: "/icons/icon-linkedin.svg",
         label: "linkedin",
         link: "/",
       },
       {
-        icon: "icons/icon-x.svg",
+        icon: "/icons/icon-x.svg",
         label: "x",
         link: "/",
       },

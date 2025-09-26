@@ -123,7 +123,7 @@ const FloatingDockMobile = ({ items, className }) => {
           className="w-10 aspect-square flex items-center justify-center rounded-full bg-[#6c4200] shadow-xl dark:bg-white transition-all duration-200 hover:scale-105"
         >
           <Image
-            src="icons/brand-icon.svg"
+            src="/icons/brand-icon.svg"
             alt="brand-icon"
             width={20}
             height={20}

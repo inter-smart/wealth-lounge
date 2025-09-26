@@ -257,7 +257,7 @@ export default function ServiceSection({ data = local_data }) {
               {data?.item_list?.map((item, index) => (
                 <div
                   key={"service-item-" + index}
-                  className="w-[calc(100%/2)] 2xs:w-[calc(100%/3)] sm:w-[calc(100%/3)] lg:w-[calc(100%/4)]"
+                  className="w-[calc(100%/2)] 3xs:w-[calc(100%/3)] sm:w-[calc(100%/3)] lg:w-[calc(100%/4)]"
                 >
                   <div
                     onMouseEnter={() => setHoveredIndex(index)}

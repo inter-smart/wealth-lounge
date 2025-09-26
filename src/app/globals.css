@@ -298,7 +298,7 @@
       @apply my-[10px] lg:my-[15px];
     }
 
-    ul > li {
+    ul {
       @apply list-disc;
     }
   }

@@ -1,11 +1,17 @@
 import dynamic from "next/dynamic";
 
 import InnerHero from "@/components/common/inner-hero";
-import ReviewSection from "@/components/blocks/testimonial/review-section";
 
 // Dynamic imports with SSR enabled for better performance
 const InfoSection = dynamic(
   () => import("@/components/blocks/testimonial/info-section"),
+  {
+    ssr: true,
+    loading: () => <p>Loading...</p>,
+  }
+);
+const ReviewSection = dynamic(
+  () => import("@/components/blocks/testimonial/review-section"),
   {
     ssr: true,
     loading: () => <p>Loading...</p>,

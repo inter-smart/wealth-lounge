@@ -29,7 +29,7 @@ export default function InfoSection({ data = local_data }) {
     <section className="w-full h-auto block py-[30px] sm:py-[40px] xl:py-[60px] 2xl:py-[80px]">
       <div className="container">
         <div className="flex flex-wrap sm:items-center sm:-mx-[15px] md:-mx-[20px] xl:-mx-[40px] 2xl:-mx-[60px] sm:[&>*]:px-[15px] md:[&>*]:px-[20px] xl:[&>*]:px-[40px] 2xl:[&>*]:px-[60px]">
-          <div className="w-full sm:w-[220px] md:w-[300px] xl:w-[520px] 2xl:w-[576px] 3xl:w-[900px]">
+          <div className="w-full sm:w-[220px] md:w-[300px] xl:w-[520px] 2xl:w-[576px] 3xl:w-[900px] max-sm:mb-[15px]">
             <div className="w-full h-[220px] sm:h-[276px] md:h-[320px] xl:h-[368px] 2xl:h-[540px] flex flex-wrap items-end gap-[1%] xl:gap-[2%] max-sm:max-w-[468px]">
               <div className="w-full max-w-[30%] xl:max-w-[30%] aspect-[25/40] overflow-hidden mb-[25px]">
                 <Image
@@ -40,7 +40,7 @@ export default function InfoSection({ data = local_data }) {
                   className="w-full h-full object-cover hover:scale-105 transition"
                 />
               </div>
-              <div className="w-full max-w-[45%] xl:max-w-[46%] h-full overflow-hidden">
+              <div className="w-full max-w-[46%] xl:max-w-[46%] h-full overflow-hidden">
                 <Image
                   src={data?.secondary_media?.path}
                   alt={data?.secondary_media?.alt}
@@ -49,7 +49,7 @@ export default function InfoSection({ data = local_data }) {
                   className="w-full h-full object-cover hover:scale-105 transition"
                 />
               </div>
-              <div className="w-full max-w-[30%] xl:max-w-[20%] aspect-[16/27] overflow-hidden mb-[40px]">
+              <div className="w-full max-w-[20%] xl:max-w-[20%] aspect-[16/27] overflow-hidden mb-[40px]">
                 <Image
                   src={data?.tertiary_media?.path}
                   alt={data?.tertiary_media?.alt}

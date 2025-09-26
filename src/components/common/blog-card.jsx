@@ -43,7 +43,7 @@ export default function BlogCard({ data }) {
           alt={data?.media?.alt || "blog-item"}
           width={320}
           height={200}
-          className="w-full h-full hover:scale-105 transition"
+          className="w-full h-full object-cover hover:scale-105 transition"
         />
         <div className="text-[8px] sm:text-[8px] xl:text-[10px] 2xl:text-[12px] 3xl:text-[16px] leading-none font-medium capitalize text-white p-[4px_10px] xl:p-[6px_12px] 3xl:p-[10px_15px] bg-primary rounded-full absolute z-1 bottom-[4px] xl:bottom-[6px] 2xl:bottom-[8px] right-[4px] xl:right-[6px] 2xl:right-[8px]">{data?.category}</div>
       </div>

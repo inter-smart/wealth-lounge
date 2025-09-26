@@ -1,7 +1,13 @@
 import dynamic from "next/dynamic";
 
 import InnerHero from "@/components/common/inner-hero";
-import DetailSection from "@/components/blocks/news/detail-section";
+const DetailSection = dynamic(
+  () => import("@/components/blocks/news/detail-section"),
+  {
+    ssr: true,
+    loading: () => <p>Loading...</p>,
+  }
+);
 
 const local_data = {
   breadcrumb: [
@@ -24,17 +30,17 @@ const local_data = {
     title: "News & Insights",
     description:
       "<p>Stay informed with the latest from the world of finance.</p>",
-  }
+  },
 };
 
 export default function Page() {
-    return (
-        <>
-            <InnerHero
-                data={local_data?.hero_section}
-                breadcrumb={local_data?.breadcrumb}
-            />
-            <DetailSection />
-        </>
-    );
+  return (
+    <>
+      <InnerHero
+        data={local_data?.hero_section}
+        breadcrumb={local_data?.breadcrumb}
+      />
+      <DetailSection />
+    </>
+  );
 }

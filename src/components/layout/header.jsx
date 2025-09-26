@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   motion,
   AnimatePresence,
@@ -28,124 +28,124 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "../ui/button";
-import { Heading } from "../utils/heading";
 import useMedia from "use-media";
+import { usePathname } from "next/navigation";
 
-const headerData = {
-  brand: {
-    media: {
-      type: "image",
-      path: "/static/brand.png",
-      alt: "logo",
-    },
-  },
-  navigation: [
-    {
-      label: "Home",
-      link: "/",
-    },
-    {
-      label: "Company",
-      link: "/about",
-      item_company: [
-        {
-          label: "About us",
-          link: "/about",
-          item_about: [
-            {
-              label: "More about us",
-              link: "/about",
-            },
-            {
-              label: "Our Values",
-              link: "/about",
-            },
-            {
-              label: "Our Journey",
-              link: "/about",
-            },
-            {
-              label: "Meet our team",
-              link: "/about",
-            },
-            {
-              label: "Our Associates",
-              link: "/about",
-            },
-            {
-              label: "Media & Recognit",
-              link: "/about",
-            },
-          ],
-        },
-        {
-          label: "About us",
-          link: "/about",
-          item_about: [
-            {
-              label: "More about us",
-              link: "/about",
-            },
-            {
-              label: "Our Values",
-              link: "/about",
-            },
-            {
-              label: "Our Journey",
-              link: "/about",
-            },
-            {
-              label: "Meet our team",
-              link: "/about",
-            },
-            {
-              label: "Our Associates",
-              link: "/about",
-            },
-            {
-              label: "Media & Recognit",
-              link: "/about",
-            },
-          ],
-        },
-        {
-          label: "Careers",
-          link: "/career",
-        },
-        {
-          label: "Privacy Policy",
-          link: "/privacy-policy",
-        },
-        {
-          label: "Terms and conditions",
-          link: "/terms-conditions",
-        },
-      ],
-    },
-    {
-      label: "Invest in GO EC",
-      link: "/invest",
-    },
-    {
-      label: "Solutions",
-      link: "/solutions",
-      item_solution: [
-        {
-          label: "GOEC Charging Hub",
-          link: "/about",
-        },
-        {
-          label: "GOEC Exclusive",
-          link: "/about",
-        },
-        {
-          label: "Public Commercial Parking",
-          link: "/about",
-        },
-      ],
-    },
-  ],
-};
+// const headerData = {
+//   brand: {
+//     media: {
+//       type: "image",
+//       path: "/static/brand.png",
+//       alt: "logo",
+//     },
+//   },
+//   navigation: [
+//     {
+//       label: "Home",
+//       link: "/",
+//     },
+//     {
+//       label: "Company",
+//       link: "/about",
+//       item_company: [
+//         {
+//           label: "About us",
+//           link: "/about",
+//           item_about: [
+//             {
+//               label: "More about us",
+//               link: "/about",
+//             },
+//             {
+//               label: "Our Values",
+//               link: "/about",
+//             },
+//             {
+//               label: "Our Journey",
+//               link: "/about",
+//             },
+//             {
+//               label: "Meet our team",
+//               link: "/about",
+//             },
+//             {
+//               label: "Our Associates",
+//               link: "/about",
+//             },
+//             {
+//               label: "Media & Recognit",
+//               link: "/about",
+//             },
+//           ],
+//         },
+//         {
+//           label: "About us",
+//           link: "/about",
+//           item_about: [
+//             {
+//               label: "More about us",
+//               link: "/about",
+//             },
+//             {
+//               label: "Our Values",
+//               link: "/about",
+//             },
+//             {
+//               label: "Our Journey",
+//               link: "/about",
+//             },
+//             {
+//               label: "Meet our team",
+//               link: "/about",
+//             },
+//             {
+//               label: "Our Associates",
+//               link: "/about",
+//             },
+//             {
+//               label: "Media & Recognit",
+//               link: "/about",
+//             },
+//           ],
+//         },
+//         {
+//           label: "Careers",
+//           link: "/career",
+//         },
+//         {
+//           label: "Privacy Policy",
+//           link: "/privacy-policy",
+//         },
+//         {
+//           label: "Terms and conditions",
+//           link: "/terms-conditions",
+//         },
+//       ],
+//     },
+//     {
+//       label: "Invest in GO EC",
+//       link: "/invest",
+//     },
+//     {
+//       label: "Solutions",
+//       link: "/solutions",
+//       item_solution: [
+//         {
+//           label: "GOEC Charging Hub",
+//           link: "/about",
+//         },
+//         {
+//           label: "GOEC Exclusive",
+//           link: "/about",
+//         },
+//         {
+//           label: "Public Commercial Parking",
+//           link: "/about",
+//         },
+//       ],
+//     },
+//   ],
+// };
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -165,15 +165,26 @@ const itemVariants = {
   exit: { opacity: 0, x: -20, transition: { duration: 0.2 } },
 };
 
-const navigationMenuTriggerStyle =
-  "text-[14px] sm:text-[12px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[18px] leading-normal font-normal text-center text-white w-full h-auto p-[4px_10px] xl:p-[6px_12px] 2xl:p-[10px_15px] 2xl:p-[15px_25px] bg-transparent border border-transparent hover:text-white focus:text-white hover:bg-black/10 focus:bg-black/50 ring-0 hover:border-white/10 data-[state=open]:border-white/10 data-[state=open]:hover:bg-black/10 data-[state=open]:text-white data-[state=open]:focus:bg-black/10 data-[state=open]:bg-black/10";
+// const navigationMenuTriggerStyle =
+//   "text-[14px] sm:text-[12px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[18px] leading-normal font-normal text-center text-white w-full h-auto p-[4px_10px] xl:p-[6px_12px] 2xl:p-[10px_15px] 2xl:p-[15px_25px] bg-transparent border border-transparent hover:text-white focus:text-white hover:bg-black/10 focus:bg-black/50 ring-0 hover:border-white/10 data-[state=open]:border-white/10 data-[state=open]:hover:bg-black/10 data-[state=open]:text-white data-[state=open]:focus:bg-black/10 data-[state=open]:bg-black/10";
+const getNavigationMenuTriggerStyle = (isActive) => {
+  const baseStyle =
+    "text-[14px] sm:text-[12px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[18px] leading-normal font-normal text-center w-full h-auto p-[4px_10px] xl:p-[6px_12px] 2xl:p-[10px_15px] 2xl:p-[15px_25px] bg-transparent border border-transparent hover:text-white focus:text-white hover:bg-black/10 focus:bg-black/50 ring-0 hover:border-white/10 data-[state=open]:border-white/10 data-[state=open]:hover:bg-black/10 data-[state=open]:text-white data-[state=open]:focus:bg-black/10 data-[state=open]:bg-black/10 transition-all duration-200";
+
+  if (isActive) {
+    return baseStyle + " text-primary border-transparent bg-primary/0";
+  }
+
+  return baseStyle + " text-white";
+};
 
 export default function Header() {
   const { scrollYProgress } = useScroll();
   const [visible, setVisible] = useState(true);
   const [bg, setBg] = useState(false);
+  const [sheetOpen, setSheetOpen] = useState(false);
 
-  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   const isDesktop = useMedia({ minWidth: "1024px" });
 
@@ -186,6 +197,16 @@ export default function Header() {
   //   const data = await res.json();
   //   return data;
   // }
+
+  // Fixed: Close sheet when pathname changes
+  useEffect(() => {
+    setSheetOpen(false);
+  }, [pathname]);
+
+  // Fixed: Handler to close navigation sheet
+  const handleNavigationLinkClick = () => {
+    setSheetOpen(false);
+  };
 
   useMotionValueEvent(scrollYProgress, "change", (current) => {
     if (typeof current === "number") {
@@ -257,7 +278,10 @@ export default function Header() {
             >
               {isDesktop && (
                 <div className="hidden lg:block">
-                  <MegaNavigationMenubar />
+                  <MegaNavigationMenubar
+                    pathname={pathname}
+                    onNavigationClick={handleNavigationLinkClick}
+                  />
                 </div>
               )}
               <div>
@@ -271,7 +295,7 @@ export default function Header() {
               </div>
               {!isDesktop && (
                 <div className="lg:hidden">
-                  <Sheet open={open} onOpenChange={setOpen}>
+                  <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
                     <SheetTrigger>
                       <div className="text-[12px] leading-none font-normal text-center text-white w-full flex items-center justify-center ">
                         <Image
@@ -295,7 +319,7 @@ export default function Header() {
                         </SheetDescription>
 
                         <AnimatePresence mode="wait">
-                          {open && (
+                          {sheetOpen && (
                             <motion.div
                               key="menu-anim"
                               variants={containerVariants}
@@ -303,7 +327,10 @@ export default function Header() {
                               animate="show"
                               exit="exit"
                             >
-                              <MegaNavigationMenubar />
+                              <MegaNavigationMenubar
+                                pathname={pathname}
+                                onNavigationClick={handleNavigationLinkClick}
+                              />
                             </motion.div>
                           )}
                         </AnimatePresence>
@@ -320,7 +347,7 @@ export default function Header() {
   );
 }
 
-function MegaNavigationMenubar() {
+function MegaNavigationMenubar({ pathname, onNavigationClick }) {
   const menuItems = [
     { label: "The Alternatives Approach", href: "/alternatives-approach" },
     { label: "Mainstream Services", href: "/" },
@@ -336,18 +363,24 @@ function MegaNavigationMenubar() {
           "max-lg:flex-col max-lg:items-start max-lg:gap-[20px] max-lg:py-[20px]"
         }
       >
-        {menuItems.map((item, i) => (
-          <motion.div key={i} variants={itemVariants}>
-            <NavigationMenuItem>
-              <NavigationMenuLink
-                asChild
-                className={navigationMenuTriggerStyle}
-              >
-                <Link href={item.href}>{item.label}</Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          </motion.div>
-        ))}
+        {menuItems.map((item, i) => {
+          const isActive = pathname === item.href; // Check if current path matches
+
+          return (
+            <motion.div key={i} variants={itemVariants}>
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  asChild
+                  className={getNavigationMenuTriggerStyle(isActive)}
+                >
+                  <Link href={item.href} onClick={onNavigationClick}>
+                    {item.label}
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            </motion.div>
+          );
+        })}
       </NavigationMenuList>
     </NavigationMenu>
   );
