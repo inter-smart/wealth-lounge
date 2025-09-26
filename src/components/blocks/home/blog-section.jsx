@@ -53,7 +53,7 @@ const local_data = {
       timestamp: "2025-05-16T05:00:00.000000Z",
       media: {
         type: "image",
-        path: "/images/home-blog-item-3.jpg",
+        path: "/images/home-blog-item-2.jpg",
         alt: "review-item",
       },
       title: "Fluffy Favourites Remastered Position Free Demo and Game Opinion",
@@ -66,7 +66,7 @@ const local_data = {
       timestamp: "2025-05-16T05:00:00.000000Z",
       media: {
         type: "image",
-        path: "/images/home-blog-item-4.jpg",
+        path: "/images/home-blog-item-2.jpg",
         alt: "review-item",
       },
       title: "Flux Position 100 percent free Casino slot games by Thunderkick",
@@ -180,7 +180,7 @@ export default function BlogSection({ data = local_data }) {
           }}
           className="max-sm:!-mr-4 max-sm:[mask-image:linear-gradient(to_right,white_90%,transparent)]"
         >
-          {data?.item_list.map((item, index) => {
+          {data?.item_list?.map((item, index) => {
             return (
               <SwiperSlide
                 key={"blog-item" + index}
