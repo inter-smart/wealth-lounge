@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 
 import InnerHero from "@/components/common/inner-hero";
+import ReviewSection from "@/components/blocks/testimonial/review-section";
 
 // Dynamic imports with SSR enabled for better performance
 const InfoSection = dynamic(
@@ -42,6 +43,7 @@ export default function Page() {
         breadcrumb={local_data?.breadcrumb}
       />
       <InfoSection />
+      <ReviewSection />
     </>
   );
 }

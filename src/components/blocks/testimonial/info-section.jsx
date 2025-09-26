@@ -21,17 +21,17 @@ const local_data = {
   },
   title: "Testimonials",
   description:
-    "<p>Our vision is to bring together innovative, prestigious and reputable investment providers across multiple asset-classes, with our growing client base, giving them the ability to absorb and apply these solutions into their own wealth creation initiatives. We will support and continue to work hard with our clients to ensure that they are always press.</p><p>Prestigious and reputable investment providers across multiple asset-classes, with our growing client base, giving them the ability to absorb and apply these solutions into their own wealth creation initiatives.</p>",
+    "<p>Our vision is to bring together innovative, prestigious and reputable investment providers across multiple asset-classes, with our growing client base, giving them the ability to absorb and apply these solutions into their own wealth creation initiatives. We will support and continue to work hard with our clients to ensure that they are always press.</p><br/><p>Prestigious and reputable investment providers across multiple asset-classes, with our growing client base, giving them the ability to absorb and apply these solutions into their own wealth creation initiatives.</p>",
   button: null,
 };
 export default function InfoSection({ data = local_data }) {
   return (
-    <section className="w-full h-auto block pt-[30px] sm:pt-[40px] xl:pt-[60px] 2xl:pt-[80px] overflow-hidden relative z-0">
+    <section className="w-full h-auto block py-[30px] sm:py-[40px] xl:py-[60px] 2xl:py-[80px]">
       <div className="container">
-        <div className="flex flex-wrap sm:items-center sm:-mx-[15px] md:-mx-[20px] xl:-mx-[30px] 2xl:-mx-[40px] sm:[&>*]:p-[15px] md:[&>*]:p-[20px] xl:[&>*]:p-[40px_30px] 2xl:[&>*]:p-[50px_40px]">
+        <div className="flex flex-wrap sm:items-center sm:-mx-[15px] md:-mx-[20px] xl:-mx-[40px] 2xl:-mx-[60px] sm:[&>*]:px-[15px] md:[&>*]:px-[20px] xl:[&>*]:px-[40px] 2xl:[&>*]:px-[60px]">
           <div className="w-full sm:w-[220px] md:w-[300px] xl:w-[520px] 2xl:w-[576px] 3xl:w-[900px]">
-            <div className="w-full h-[340px] sm:h-[420px] md:h-[468px] xl:h-[576px] 2xl:h-[768px] flex flex-wrap items-end border border-red-500 gap-[1%] xl:gap-[2%] max-sm:max-w-[468px]">
-              <div className="w-full max-w-[30%] xl:max-w-[30%] aspect-[25/40] overflow-hidden">
+            <div className="w-full h-[220px] sm:h-[276px] md:h-[320px] xl:h-[368px] 2xl:h-[540px] flex flex-wrap items-end gap-[1%] xl:gap-[2%] max-sm:max-w-[468px]">
+              <div className="w-full max-w-[30%] xl:max-w-[30%] aspect-[25/40] overflow-hidden mb-[25px]">
                 <Image
                   src={data?.primary_media?.path}
                   alt={data?.primary_media?.alt}
@@ -49,7 +49,7 @@ export default function InfoSection({ data = local_data }) {
                   className="w-full h-full object-cover hover:scale-105 transition"
                 />
               </div>
-              <div className="w-full max-w-[30%] xl:max-w-[20%] aspect-[16/27] overflow-hidden">
+              <div className="w-full max-w-[30%] xl:max-w-[20%] aspect-[16/27] overflow-hidden mb-[40px]">
                 <Image
                   src={data?.tertiary_media?.path}
                   alt={data?.tertiary_media?.alt}
@@ -61,7 +61,7 @@ export default function InfoSection({ data = local_data }) {
             </div>
           </div>
           <div className="w-full sm:w-[calc(100%-220px)] md:w-[calc(100%-300px)] xl:w-[calc(100%-520px)] 2xl:w-[calc(100%-576px)] 3xl:w-[calc(100%-900px)]">
-            <div className="w-full">
+            <div className="w-full xl:max-w-[440px] 2xl:max-w-[668px]">
               <Heading
                 as="h2"
                 size="heading2"
@@ -69,13 +69,6 @@ export default function InfoSection({ data = local_data }) {
               >
                 {data?.title}
               </Heading>
-              <Text
-                as="p"
-                size="text2"
-                className="leading-tight text-[#191919] mb-[10px] xl:mb-[15px] 2xl:mb-[20px]"
-              >
-                {data?.sub_title}
-              </Text>
               <Text as="div" size="text1" className="text-[#191919]">
                 {parse(data?.description)}
               </Text>
