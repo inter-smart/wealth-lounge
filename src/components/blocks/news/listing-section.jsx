@@ -259,22 +259,23 @@ export default function ListingSection({ data = local_data }) {
         <div className="flex flex-wrap mx-[-5px] xl:mx-[-10px] 2xl:mx-[-12px] 3xl:mx-[-15px] [&>*]:p-[30px_5px] xl:[&>*]:p-[50px_10px] 2xl:[&>*]:p-[60px_12px] 3xl:[&>*]:p-[75px_15px] relative z-0">
           <div className="w-full h-full bg-[radial-gradient(circle,transparent_5%,#FFFBF4_100%)] pointer-events-none absolute  z-2 inset-0" />
           {filteredItems.map((item, index) => {
-  const totalItems = filteredItems.length;
-  const colIndex = index % columns; // column position (0-based)
-  const rowIndex = Math.floor(index / columns); // row position
-  const totalRows = Math.ceil(totalItems / columns);
+          const totalItems = filteredItems.length;
+          const colIndex = index % columns; // column position (0-based)
+          const rowIndex = Math.floor(index / columns); // row position
+          const totalRows = Math.ceil(totalItems / columns);
 
-  // Border conditions
-  const isLastColumn = colIndex === columns - 1; 
-  const isLastRow = rowIndex === totalRows - 1;
-  const isLastInColumn = index + columns >= totalItems; // item has no one below it
+          // Border conditions
+          const isFirstRow = rowIndex === 0;
+          const isLastColumn = colIndex === columns - 1; 
+          const isLastRow = rowIndex === totalRows - 1;
 
   return (
     <div
       key={"item" + index}
       className={`w-full sm:w-1/2 md:w-1/3 xl:w-1/4 border-r border-b border-[#998262]
         ${isLastColumn ? "border-r-0" : ""}
-        ${isLastRow || isLastInColumn ? "border-b-0" : ""}
+        ${isFirstRow ? "!pt-[15px]" : ""}
+        ${isLastRow ? "border-b-0 !pb-[15px]" : ""}
       `}
     >
       <div className="w-full h-full relative z-3">
