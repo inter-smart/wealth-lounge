@@ -159,33 +159,33 @@ const local_data = {
       description:
         "<p>Lorem Ipsum is simply dummy text of the printing and types</p>",
     },
-    // {
-    //   link: "/news/news-detail",
-    //   category: "news",
-    //   timestamp: "2025-05-16T05:00:00.000000Z",
-    //   media: {
-    //     type: "image",
-    //     path: "/images/home-blog-item-1.jpg",
-    //     alt: "review-item",
-    //   },
-    //   title:
-    //     "Activities Mania Deluxe Slot Opinion Play Free Demonstration 2024",
-    //   description:
-    //     "<p>Lorem Ipsum is simply dummy text of the printing and types</p>",
-    // },
-    // {
-    //   link: "/news/news-detail",
-    //   category: "blog",
-    //   timestamp: "2025-05-16T05:00:00.000000Z",
-    //   media: {
-    //     type: "image",
-    //     path: "/images/home-blog-item-2.jpg",
-    //     alt: "review-item",
-    //   },
-    //   title: "Flux Position 100 percent free Casino slot games by Thunderkick",
-    //   description:
-    //     "<p>Lorem Ipsum is simply dummy text of the printing and types</p>",
-    // },
+    {
+      link: "/news/news-detail",
+      category: "news",
+      timestamp: "2025-05-16T05:00:00.000000Z",
+      media: {
+        type: "image",
+        path: "/images/home-blog-item-1.jpg",
+        alt: "review-item",
+      },
+      title:
+        "Activities Mania Deluxe Slot Opinion Play Free Demonstration 2024",
+      description:
+        "<p>Lorem Ipsum is simply dummy text of the printing and types</p>",
+    },
+    {
+      link: "/news/news-detail",
+      category: "blog",
+      timestamp: "2025-05-16T05:00:00.000000Z",
+      media: {
+        type: "image",
+        path: "/images/home-blog-item-2.jpg",
+        alt: "review-item",
+      },
+      title: "Flux Position 100 percent free Casino slot games by Thunderkick",
+      description:
+        "<p>Lorem Ipsum is simply dummy text of the printing and types</p>",
+    },
   ],
 };
 
@@ -269,21 +269,21 @@ export default function ListingSection({ data = local_data }) {
           const isLastColumn = colIndex === columns - 1; 
           const isLastRow = rowIndex === totalRows - 1;
 
-  return (
-    <div
-      key={"item" + index}
-      className={`w-full sm:w-1/2 md:w-1/3 xl:w-1/4 border-r border-b border-[#998262]
-        ${isLastColumn ? "border-r-0" : ""}
-        ${isFirstRow ? "!pt-[15px]" : ""}
-        ${isLastRow ? "border-b-0 !pb-[15px]" : ""}
-      `}
-    >
-      <div className="w-full h-full relative z-3">
-        <BlogCard data={item} />
-      </div>
-    </div>
-  );
-})}
+          return (
+            <div
+              key={"item" + index}
+              className={`w-full sm:w-1/2 md:w-1/3 xl:w-1/4 border-r border-b border-[#998262]
+                ${isLastColumn ? "border-r-0" : ""}
+                ${isFirstRow ? "!pt-[15px]" : ""}
+                ${isLastRow ? "border-b-0 !pb-[15px]" : ""}
+              `}
+            >
+              <div className="w-full h-full relative z-3">
+                <BlogCard data={item} />
+              </div>
+            </div>
+          );
+        })}
 
         </div>
       </div>
