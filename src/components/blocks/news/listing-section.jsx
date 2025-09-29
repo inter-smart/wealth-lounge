@@ -237,7 +237,7 @@ export default function ListingSection({ data = local_data }) {
         </div>
         <div className="w-full h-auto flex justify-end">
           <Select onValueChange={(value) => setFilter(value)}>
-            <SelectTrigger className="w-[115px] 2xl:w-[152px] !h-[30px] 2xl:!h-[40px] px-[15px] xl:px-[28px] mb-[20px] xl:mb-[35px] border-1 border-[#000] focus:ring-0 focus:shadow-none focus-visible:ring-0 focus-visible:shadow-none [&_.lucide-chevron-down]:hidden relative z-0">
+            <SelectTrigger className="w-[105px] 2xl:w-[152px] !h-[30px] 2xl:!h-[40px] px-[15px] xl:px-[28px] mb-[15px] xl:mb-[20px] 2xl:mb-[35px] border-1 border-[#000] focus:ring-0 focus:shadow-none focus-visible:ring-0 focus-visible:shadow-none [&_.lucide-chevron-down]:hidden relative z-0">
               <SelectValue placeholder="View All" />
               <div className="w-[15px] h-[14px] absolute -z-1 right-[15px] 2xl:right-[28px]">
                 <Image
