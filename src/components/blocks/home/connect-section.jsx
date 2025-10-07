@@ -18,7 +18,7 @@ export default function ConnectSection({ data = local_data }) {
         alt="home-blog-bg"
         width={321}
         height={323}
-        className="w-[140px] xl:w-[200px] 2xl:w-[220px] 3xl:w-[240px] absolute -z-1 left-[5%] xl:left-[10%] 3xl:left-[12%] top-0 bottom-0 m-auto"
+        className="w-[140px] xl:w-[180px] 2xl:w-[200px] 3xl:w-[240px] absolute -z-1 left-[5%] xl:left-[10%] 3xl:left-[12%] top-0 bottom-0 m-auto"
       />
       <div className="container">
         <div className="flex flex-wrap items-center -mx-[15px] sm:-mx-[20px] xl:-mx-[35px] 2xl:-mx-[50px] [&>*]:px-[15px] sm:[&>*]:px-[20px] xl:[&>*]:px-[35px] 2xl:[&>*]:px-[50px] ">

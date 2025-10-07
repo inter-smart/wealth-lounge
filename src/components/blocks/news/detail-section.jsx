@@ -208,7 +208,7 @@ export default function DetailSection({ data = local_data }) {
         alt="news-info-bg"
         width={436}
         height={467}
-        className="w-full max-w-[168px] sm:max-w-[300px] xl:max-w-[368px] 2xl:max-w-[420px] absolute -z-1 top-[-40px] right-[6%] xl:right-[calc((100%-var(--container-xl))/2)] 2xl:right-[calc((100%-var(--container-2xl))/2)] 3xl:right-[calc((100%-var(--container-3xl))/2)] mr-4"
+        className="w-full max-w-[168px] sm:max-w-[300px] xl:max-w-[320px] 2xl:max-w-[376px] absolute -z-1 top-[-40px] right-[6%] xl:right-[calc((100%-var(--container-xl))/2)] 2xl:right-[calc((100%-var(--container-2xl))/2)] 3xl:right-[calc((100%-var(--container-3xl))/2)] mr-4"
       />
       <div className="container">
         <div className="flex flex-wrap -mx-[15px] md:-mx-[20px] xl:-mx-[25px] 2xl:-mx-[30px] [&>*]:p-[15px] md:[&>*]:p-[20px] xl:[&>*]:p-[25px] 2xl:[&>*]:p-[30px]">

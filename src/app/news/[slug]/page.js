@@ -12,7 +12,7 @@ const DetailSection = dynamic(
 const local_data = {
   breadcrumb: [
     { label: "Home", href: "/" },
-    { label: "news", href: "/news" },
+    { label: "News", href: "/news" },
   ],
   hero_section: {
     background_media: {

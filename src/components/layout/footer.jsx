@@ -45,7 +45,7 @@ const local_data = {
       ],
     },
     {
-      title: "Quick Links",
+      title: "Useful Links",
       item_list: [
         {
           link: "/contact",
@@ -289,7 +289,7 @@ export default function Footer({ data = local_data }) {
 function CompanyInfoCard({ data }) {
   return (
     <div className="w-full sm:w-1/2 md:w-1/5 lg:w-[240px] xl:w-[276px] 2xl:w-[368px] 3xl:w-[476px]">
-      <div className="w-[100px] sm:w-[120px] lg:w-[180px] xl:w-[200px] 2xl:w-[240px] 3xl:w-[300px] sm:ml-auto mb-[10px] xl:mb-[15px] 2xl:mb-[20px]">
+      <div className="w-[140px] sm:w-[120px] lg:w-[180px] xl:w-[200px] 2xl:w-[240px] 3xl:w-[300px] sm:ml-auto mb-[10px] xl:mb-[15px] 2xl:mb-[20px]">
         <Image
           src={data?.media?.path}
           alt={data?.media?.alt}

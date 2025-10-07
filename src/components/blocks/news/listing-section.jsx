@@ -13,10 +13,19 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import parse from "html-react-parser";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 const local_data = {
   media: null,
-  title: "News & Blogs",
+  title: "News & Insights",
   description:
     "<p>Our vision is to bring together innovative, prestigious and reputable investment providers across multiple asset-classes, with our growing client base, giving them the ability to absorb and apply these solutions into their own wealth creation initiatives. We will support and continue to work hard with our clients to ensure that they are always presented with the most robust investment opportunities from an ever-changing economic landscape.</p>",
   button: {
@@ -237,9 +246,9 @@ export default function ListingSection({ data = local_data }) {
         </div>
         <div className="w-full h-auto flex justify-end">
           <Select onValueChange={(value) => setFilter(value)}>
-            <SelectTrigger className="data-[placeholder]:text-black w-[120px] 2xl:w-[150px] !h-[40px] px-[15px] 2xl:px-[28px] border-1 border-black focus:ring-0 focus:shadow-none focus-visible:ring-0 focus-visible:shadow-none [&_.lucide-chevron-down]:hidden relative z-0">
+            <SelectTrigger className="data-[placeholder]:text-black w-[105px] 2xl:w-[152px] !h-[30px] 2xl:!h-[40px] px-[10px] xl:px-[15px] 2xl:px-[25px] mb-[15px] xl:mb-[20px] 2xl:mb-[35px] border-1 border-[#000] focus:ring-0 focus:shadow-none focus-visible:ring-0 focus-visible:shadow-none [&_.lucide-chevron-down]:hidden relative z-0">
               <SelectValue placeholder="View All" />
-              <div className="w-[15px] h-[14px] absolute -z-1 right-[20px] xl:right-[28px]">
+              <div className="w-[15px] h-[14px] absolute -z-1 right-[15px] 2xl:right-[28px]">
                 <Image
                   src="/images/news-dwn-arrw.svg"
                   alt="arrow"
@@ -259,32 +268,48 @@ export default function ListingSection({ data = local_data }) {
         <div className="flex flex-wrap mx-[-5px] xl:mx-[-10px] 2xl:mx-[-12px] 3xl:mx-[-15px] [&>*]:p-[30px_5px] xl:[&>*]:p-[50px_10px] 2xl:[&>*]:p-[60px_12px] 3xl:[&>*]:p-[75px_15px] relative z-0">
           <div className="w-full h-full bg-[radial-gradient(circle,transparent_5%,#FFFBF4_100%)] pointer-events-none absolute  z-2 inset-0" />
           {filteredItems.map((item, index) => {
-  const totalItems = filteredItems.length;
-  const colIndex = index % columns; // column position (0-based)
-  const rowIndex = Math.floor(index / columns); // row position
-  const totalRows = Math.ceil(totalItems / columns);
+            const totalItems = filteredItems.length;
+            const colIndex = index % columns; // column position (0-based)
+            const rowIndex = Math.floor(index / columns); // row position
+            const totalRows = Math.ceil(totalItems / columns);
 
-  // Border conditions
-  const isLastColumn = colIndex === columns - 1; 
-  const isLastRow = rowIndex === totalRows - 1;
-  const isLastInColumn = index + columns >= totalItems; // item has no one below it
+            // Border conditions
+            const isFirstRow = rowIndex === 0;
+            const isLastColumn = colIndex === columns - 1;
+            const isLastRow = rowIndex === totalRows - 1;
 
-  return (
-    <div
-      key={"item" + index}
-      className={`w-full sm:w-1/2 md:w-1/3 xl:w-1/4 border-r border-b border-[#998262]
-        ${isLastColumn ? "border-r-0" : ""}
-        ${isLastRow || isLastInColumn ? "border-b-0" : ""}
-      `}
-    >
-      <div className="w-full h-full relative z-3">
-        <BlogCard data={item} />
-      </div>
-    </div>
-  );
-})}
-
+            return (
+              <div
+                key={"item" + index}
+                className={`w-full sm:w-1/2 md:w-1/3 xl:w-1/4 border-r border-b border-[#998262]
+                ${isLastColumn ? "border-r-0" : ""}
+                ${isFirstRow ? "!pt-[15px]" : ""}
+                ${isLastRow ? "border-b-0 !pb-[15px]" : ""}
+              `}
+              >
+                <div className="w-full h-full relative z-3">
+                  <BlogCard data={item} />
+                </div>
+              </div>
+            );
+          })}
         </div>
+        <Pagination className={"justify-end mt-[15px] xl:mt-[30px]"}>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious href="#" />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">1</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationEllipsis />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationNext href="#" />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </div>
     </section>
   );
