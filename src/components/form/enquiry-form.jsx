@@ -118,12 +118,12 @@ export default function EnquiryForm() {
           name="phone"
           render={({ field }) => (
             <FormItem className="w-full sm:w-1/3 lg:w-1/3">
-              <FormLabel className="sr-only">Phone*</FormLabel>
+              <FormLabel className="sr-only">Phone</FormLabel>
               <FormControl>
                 <Input
                   className={inputStyle}
                   type="tel"
-                  placeholder="Phone*"
+                  placeholder="Phone"
                   {...field}
                 />
               </FormControl>

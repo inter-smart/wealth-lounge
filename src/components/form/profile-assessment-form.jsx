@@ -920,7 +920,7 @@ export default function MultiStepApplicationForm() {
                 type="button"
                 onClick={handleNext}
                 variant="outline"
-                className="text-[#1c1c1c] border-[#1c1c1c] min-w-[100px] sm:min-w-[120px] xl:min-w-[120px] 2xl:min-w-[140px]"
+                className="xl:text-[16px] xl:h-[40px] text-[#1c1c1c] border-[#1c1c1c] min-w-[100px] sm:min-w-[120px] xl:min-w-[120px] 2xl:min-w-[140px]"
                 animate={true}
               >
                 Next
@@ -945,7 +945,7 @@ export default function MultiStepApplicationForm() {
                   }
                 }}
                 variant="outline"
-                className="text-[#1c1c1c] border-[#1c1c1c] min-w-[100px] sm:min-w-[120px] xl:min-w-[120px] 2xl:min-w-[140px]"
+                className="xl:text-[16px] xl:h-[40px] text-[#1c1c1c] border-[#1c1c1c] min-w-[100px] sm:min-w-[120px] xl:min-w-[120px] 2xl:min-w-[140px]"
                 animate={true}
               >
                 Submit

@@ -110,7 +110,7 @@ function CountSection({ data }) {
                 <CountUp
                   end={parseInt(item?.value)}
                   duration={2.75}
-                  separator=","
+                  separator=""
                   suffix={item?.sufix}
                   enableScrollSpy
                 />

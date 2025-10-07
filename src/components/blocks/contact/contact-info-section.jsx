@@ -18,7 +18,7 @@ const local_data = {
       title: "Headquarters",
       description:
         "<p>DUQE Square Business Center Quarter Deck, QE2, Port Rashid, Dubai, UAE</p>",
-      phone: ["+971 4 871 6555", "+971 4 871 6555"],
+      phone: ["+971 4 871 6555"],
       email: null,
     },
     {

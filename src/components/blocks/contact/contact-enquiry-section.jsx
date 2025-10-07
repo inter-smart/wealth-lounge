@@ -19,6 +19,7 @@ const local_data = {
     "<p>We have created this form to help us ﬁnd the right investment opportunities for you. The questions below will give us a good insight into what type of investor you are, or would like to become, and which products would be the best ﬁt for you and your investment goals. Want to find out what the smartest investment options are for yourself? Complete this short questionnaire let us help you explore which type of investments are best suited to your needs:</p>",
   button: null,
   location_url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.2328542636224!2d55.281101199999995!3d25.262751200000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f454aa34dacbf%3A0xc807568e929e8477!2sDUQE!5e0!3m2!1sen!2sin!4v1758892501657!5m2!1sen!2sin",
+  form_title: "Get in Touch",
   item_list: [
     {
       media: {
@@ -72,7 +73,7 @@ export default function ContactEnquirySection({ data = local_data }) {
             </div>
           </div>
           <div className="w-full sm:w-1/2 md:w-1/2">
-            <div className="group w-full h-full xl:min-h-[540px] 2xl:min-h-[620px] 3xl:min-h-[768px] bg-[#141414] overflow-hidden relative z-0 p-[25px_20px_40px] sm:p-[35px_30px_80px] xl:p-[50px_60px_100px] 2xl:p-[80px_80px_120px] 3xl:p-[100px_80px_140px]">
+            <div className="group w-full h-full xl:min-h-[540px] 2xl:min-h-[620px] 3xl:min-h-[768px] bg-[#141414] overflow-hidden relative z-0 p-[25px_20px_30px] sm:p-[35px_30px_40px] xl:p-[50px_60px_60px] 2xl:p-[80px_80px_80px] 3xl:p-[100px_80px_100px]">
               <Heading
                 as="h2"
                 size="heading2"
@@ -87,7 +88,7 @@ export default function ContactEnquirySection({ data = local_data }) {
                 width={332}
                 height={356}
                 unoptimized
-                className="w-[120px] sm:w-[176px] xl:w-[220px] 2xl:w-[320px] object-cover absolute -z-1 bottom-0 right-0 origin-bottom-right group-hover:scale-110 group-hover:opacity-50 transition"
+                className="w-[120px] sm:w-[176px] xl:w-[220px] 2xl:w-[268px] 3xl:w-[320px] object-cover absolute -z-1 bottom-0 right-0 origin-bottom-right group-hover:scale-110 group-hover:opacity-50 transition"
               />
             </div>
           </div>

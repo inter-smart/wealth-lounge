@@ -100,8 +100,8 @@ function SocialLinks({ links }) {
   if (!links?.length) return null;
 
   return (
-    <div className="absolute z-1 top-0 right-[10px] xl:right-[15px] 2xl:right-[20px]">
-      <div className="flex flex-col w-[20px] xl:w-[25px] 2xl:w-[35px] h-auto bg-primary p-2 relative z-0">
+    <div className="absolute z-1 top-0 left-[10px] sm:left-auto sm:right-[10px] xl:right-[15px] 2xl:right-[20px]">
+      <div className="flex flex-col w-[20px] xl:w-[25px] 2xl:w-[35px] h-auto bg-primary py-2 p-1 xl:p-2 relative z-0">
         {links.map((socialItem, i) => (
           <div key={`social-item-${i}`}>
             <a
@@ -215,11 +215,11 @@ function TeamCard({ item, withDialog = false }) {
                         </AlertDialogTitle>
                         <AlertDialogDescription
                           className={
-                            "w-full max-h-[176px] sm:max-h-[140px] xl:max-h-[176px] 2xl:max-h-[240px] [mask-image:linear-gradient(to_bottom,white_80%,transparent)] overflow-y-auto pb-4"
+                            "w-full max-h-[176px] sm:max-h-[140px] xl:max-h-[176px] 2xl:max-h-[240px] [mask-image:linear-gradient(to_bottom,white_80%,transparent)] overflow-y-auto pb-5"
                           }
                         >
                           <Text
-                            as="div"
+                            as="span"
                             size="text1"
                             className="text-[#191919]"
                           >
@@ -231,7 +231,7 @@ function TeamCard({ item, withDialog = false }) {
                   </div>
                 </div>
 
-                <AlertDialogFooter className="absolute z-1 top-0 right-0 -translate-y-full">
+                <AlertDialogFooter className="absolute z-1 top-0 right-1 sm:right-0 sm:-translate-y-full">
                   <AlertDialogCancel className="text-white px-0 border-0 hover:text-primary hover:bg-transparent">
                     <X className="size-6 " />
                   </AlertDialogCancel>

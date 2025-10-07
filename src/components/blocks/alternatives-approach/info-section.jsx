@@ -173,7 +173,7 @@ const local_data = {
 
 export default function InfoSection({ data = local_data }) {
   return (
-    <section className="w-full h-auto block pt-[30px] sm:pt-[40px] xl:pt-[60px] 2xl:pt-[80px] overflow-hidden relative z-0">
+    <section className="w-full h-auto block pt-[20px] sm:pt-[30px] xl:pt-[40px] 2xl:pt-[60px] overflow-hidden relative z-0">
       <div className="container">
         <div className="flex flex-wrap sm:items-center sm:-mx-[15px] md:-mx-[20px] xl:-mx-[30px] 2xl:-mx-[40px] sm:[&>*]:p-[15px] md:[&>*]:p-[20px] xl:[&>*]:p-[40px_30px] 2xl:[&>*]:p-[50px_40px]">
           <div className="w-full sm:w-[calc(100%-220px)] md:w-[calc(100%-300px)] xl:w-[calc(100%-520px)] 2xl:w-[calc(100%-576px)] 3xl:w-[calc(100%-768px)]">
@@ -215,7 +215,7 @@ export default function InfoSection({ data = local_data }) {
       {data?.types?.item_list?.map((item, index) => (
         <div
           key={"types-item" + index}
-          className={`w-full h-auto py-[30px] sm:py-[40px] xl:py-[80px] 2xl:py-[100px] ${
+          className={`w-full h-auto py-[30px] sm:py-[40px] xl:py-[60px] 2xl:py-[80px] ${
             index % 2 === 0 ? "bg-white" : "bg-[#fffbf4]"
           } `}
         >

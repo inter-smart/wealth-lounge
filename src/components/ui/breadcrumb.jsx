@@ -39,7 +39,7 @@ function BreadcrumbLink({ asChild, className, ...props }) {
     <Comp
       data-slot="breadcrumb-link"
       className={cn(
-        "hover:text-foreground transition-colors",
+        "hover:text-primary transition-colors",
         "text-[10px] sm:text-[12px] lg:text-[12px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[18px] leading-normal font-normal text-white",
         className
       )}
@@ -56,7 +56,7 @@ function BreadcrumbPage({ className, ...props }) {
       aria-disabled="true"
       aria-current="page"
       className={cn(
-        "text-[10px] sm:text-[12px] lg:text-[12px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[18px] leading-normal font-normal text-primary",
+        "text-[10px] sm:text-[12px] lg:text-[12px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[18px] leading-normal font-normal text-[#C7AF7E]",
         className
       )}
       {...props}

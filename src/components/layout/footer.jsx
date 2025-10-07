@@ -27,15 +27,15 @@ const local_data = {
           label: "Alternatives Approach",
         },
         {
-          link: "/mainstream-services",
+          link: "/",
           label: "Mainstream Services",
         },
         {
-          link: "/burning-questions",
+          link: "/",
           label: "Burning questions",
         },
         {
-          link: "/corporate-social-responsibility",
+          link: "/",
           label: "Corporate Social Responsibility",
         },
         {
@@ -56,7 +56,7 @@ const local_data = {
           label: "Privacy Policy",
         },
         {
-          link: "/terms",
+          link: "/privacy-policy",
           label: "Terms",
         },
       ],
@@ -130,7 +130,7 @@ export default function Footer({ data = local_data }) {
         alt="footer-bg-1"
         width={868}
         height={419}
-        className="w-[376px] sm:w-[468px] xl:w-[576px] 2xl:w-[676px] 3xl:w-[868px] absolute -z-1 top-[30px] sm:top-[40px] xl:top-[80px] 2xl:top-[60px] left-[6%] xl:left-[calc((100%-var(--container-xl))/2)] 2xl:left-[calc((100%-var(--container-2xl))/2)] 3xl:left-[calc((100%-var(--container-3xl))/2)] ml-4"
+        className="w-[376px] sm:w-[468px] xl:w-[576px] 2xl:w-[676px] 3xl:w-[868px] absolute -z-1 top-[30px] sm:top-[40px] xl:top-[80px] 2xl:top-[50px] 3xl:top-[60px] left-[6%] xl:left-[calc((100%-var(--container-xl))/2)] 2xl:left-[calc((100%-var(--container-2xl))/2)] 3xl:left-[calc((100%-var(--container-3xl))/2)] ml-4"
       />
       <div className="container">
         <div className="flex flex-wrap -mx-[15px] sm:-mx-[15px] xl:-mx-[20px] 2xl:-mx-[40px] [&>*]:p-[15px] sm:[&>*]:p-[15px] xl:[&>*]:p-[20px] 2xl:[&>*]:p-[40px]">

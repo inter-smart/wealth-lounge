@@ -4,7 +4,7 @@ import { Text } from "@/components/utils/text";
 export default function ReviewCard({ data }) {
   return (
     <div className="w-full h-full min-h-[200px] 3xs:min-h-[220px] sm:min-h-[200px] xl:min-h-[220px] 2xl:min-h-[268px] 3xl:min-h-[320px] flex flex-col justify-between bg-white border border-[#c8c8c8] p-[15px] sm:p-[20px] xl:p-[30px_30px_25px] 2xl:p-[40px_40px_30px]">
-      <div className="w-full [mask-image:linear-gradient(to_bottom,white_80%,transparent)] h-[140px] sm:h-[130px] xl:h-[150px] 2xl:h-[170px] 3xl:h-[190px] overflow-y-auto pb-2">
+      <div className="w-full [mask-image:linear-gradient(to_bottom,white_80%,transparent)] h-[140px] sm:h-[130px] xl:h-[150px] 2xl:h-[170px] 3xl:h-[190px] overflow-y-auto pb-4">
         <Text as="div" size="text1" className="text-[#191919]">
           {parse(data?.description)}
         </Text>

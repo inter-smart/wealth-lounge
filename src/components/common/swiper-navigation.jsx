@@ -49,7 +49,7 @@ export default function SwiperNavigation({ swiperRef }) {
         className={`w-[var(--bx-xy)] h-auto aspect-square rounded-full transition ${
           isBeginning
             ? "cursor-not-allowed opacity-50"
-            : "cursor-pointer  hover:bg-primary/20"
+            : "cursor-pointer hover:bg-primary/20"
         }`}
       >
         <Image
@@ -69,7 +69,7 @@ export default function SwiperNavigation({ swiperRef }) {
         className={`w-[var(--bx-xy)] h-auto aspect-square rounded-full transition ${
           isEnd
             ? "cursor-not-allowed opacity-50"
-            : "cursor-pointer  hover:bg-primary/20"
+            : "cursor-pointer hover:bg-primary/20"
         }`}
       >
         <Image

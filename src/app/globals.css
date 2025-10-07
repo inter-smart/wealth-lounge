@@ -290,7 +290,7 @@
 
     ul,
     ol {
-      @apply pl-[20px] lg:pl-[30px];
+      @apply pl-[15px] lg:pl-[15px] 2xl:pl-[20px];
     }
 
     ul > li,

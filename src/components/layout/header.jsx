@@ -31,122 +31,6 @@ import { Button } from "../ui/button";
 import useMedia from "use-media";
 import { usePathname } from "next/navigation";
 
-// const headerData = {
-//   brand: {
-//     media: {
-//       type: "image",
-//       path: "/static/brand.png",
-//       alt: "logo",
-//     },
-//   },
-//   navigation: [
-//     {
-//       label: "Home",
-//       link: "/",
-//     },
-//     {
-//       label: "Company",
-//       link: "/about",
-//       item_company: [
-//         {
-//           label: "About us",
-//           link: "/about",
-//           item_about: [
-//             {
-//               label: "More about us",
-//               link: "/about",
-//             },
-//             {
-//               label: "Our Values",
-//               link: "/about",
-//             },
-//             {
-//               label: "Our Journey",
-//               link: "/about",
-//             },
-//             {
-//               label: "Meet our team",
-//               link: "/about",
-//             },
-//             {
-//               label: "Our Associates",
-//               link: "/about",
-//             },
-//             {
-//               label: "Media & Recognit",
-//               link: "/about",
-//             },
-//           ],
-//         },
-//         {
-//           label: "About us",
-//           link: "/about",
-//           item_about: [
-//             {
-//               label: "More about us",
-//               link: "/about",
-//             },
-//             {
-//               label: "Our Values",
-//               link: "/about",
-//             },
-//             {
-//               label: "Our Journey",
-//               link: "/about",
-//             },
-//             {
-//               label: "Meet our team",
-//               link: "/about",
-//             },
-//             {
-//               label: "Our Associates",
-//               link: "/about",
-//             },
-//             {
-//               label: "Media & Recognit",
-//               link: "/about",
-//             },
-//           ],
-//         },
-//         {
-//           label: "Careers",
-//           link: "/career",
-//         },
-//         {
-//           label: "Privacy Policy",
-//           link: "/privacy-policy",
-//         },
-//         {
-//           label: "Terms and conditions",
-//           link: "/terms-conditions",
-//         },
-//       ],
-//     },
-//     {
-//       label: "Invest in GO EC",
-//       link: "/invest",
-//     },
-//     {
-//       label: "Solutions",
-//       link: "/solutions",
-//       item_solution: [
-//         {
-//           label: "GOEC Charging Hub",
-//           link: "/about",
-//         },
-//         {
-//           label: "GOEC Exclusive",
-//           link: "/about",
-//         },
-//         {
-//           label: "Public Commercial Parking",
-//           link: "/about",
-//         },
-//       ],
-//     },
-//   ],
-// };
-
 const containerVariants = {
   hidden: { opacity: 0 },
   show: {
@@ -165,11 +49,9 @@ const itemVariants = {
   exit: { opacity: 0, x: -20, transition: { duration: 0.2 } },
 };
 
-// const navigationMenuTriggerStyle =
-//   "text-[14px] sm:text-[12px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[18px] leading-normal font-normal text-center text-white w-full h-auto p-[4px_10px] xl:p-[6px_12px] 2xl:p-[10px_15px] 2xl:p-[15px_25px] bg-transparent border border-transparent hover:text-white focus:text-white hover:bg-black/10 focus:bg-black/50 ring-0 hover:border-white/10 data-[state=open]:border-white/10 data-[state=open]:hover:bg-black/10 data-[state=open]:text-white data-[state=open]:focus:bg-black/10 data-[state=open]:bg-black/10";
 const getNavigationMenuTriggerStyle = (isActive) => {
   const baseStyle =
-    "text-[14px] sm:text-[12px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[18px] leading-normal font-normal text-center w-full h-auto p-[4px_10px] xl:p-[6px_12px] 2xl:p-[10px_15px] 2xl:p-[15px_25px] bg-transparent border border-transparent hover:text-white focus:text-white hover:bg-black/10 focus:bg-black/50 ring-0 hover:border-white/10 data-[state=open]:border-white/10 data-[state=open]:hover:bg-black/10 data-[state=open]:text-white data-[state=open]:focus:bg-black/10 data-[state=open]:bg-black/10 transition-all duration-200";
+    "text-[14px] sm:text-[12px] xl:text-[12px] 2xl:text-[14px] 3xl:text-[18px] leading-normal font-normal text-center w-full h-auto p-[4px_10px] xl:p-[6px_12px] 2xl:p-[10px_15px] 2xl:p-[15px_25px] bg-transparent border border-transparent hover:text-white focus:text-primary hover:bg-black/10 focus:bg-black/50 ring-0 hover:border-white/10 data-[state=open]:border-white/10 data-[state=open]:hover:bg-black/10 data-[state=open]:text-white data-[state=open]:focus:bg-black/10 data-[state=open]:bg-black/10 transition-all duration-200";
 
   if (isActive) {
     return baseStyle + " text-primary border-transparent bg-primary/0";
